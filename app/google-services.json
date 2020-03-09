@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1033325811996",
+    "firebase_url": "https://payungi.firebaseio.com",
+    "project_id": "payungi",
+    "storage_bucket": "payungi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033325811996:android:4623f7dc29220c3910c2d9",
+        "android_client_info": {
+          "package_name": "com.example.jphone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033325811996-iotc6e8ef72lpvi1m8eccbnf8snj6dvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx85xh7tkB2LMccH6u_nzLBo2oRzhzrTs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033325811996-iotc6e8ef72lpvi1m8eccbnf8snj6dvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
