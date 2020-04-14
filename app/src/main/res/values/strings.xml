@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JPhone</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="map_key" translatable="false">AIzaSyDZSAehN4i5MmyHQqe_KbQ5FLLb9cxpwUw</string>
 </resources>

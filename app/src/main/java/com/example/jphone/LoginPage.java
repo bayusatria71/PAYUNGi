@@ -27,12 +27,13 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+
+
     mAuth = FirebaseAuth.getInstance();
     accountText = findViewById(R.id.accountText);
     loginButton = findViewById(R.id.loginButton);
     inputEmail = findViewById(R.id.inputEmail);
     inputPassword = findViewById(R.id.inputPassword);
-
 
     accountText.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -57,6 +58,7 @@ public class LoginPage extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         finish();
                     }
+
                 }
             });
         }
