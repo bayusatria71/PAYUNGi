@@ -24,12 +24,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+
+import org.w3c.dom.Document;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,6 +52,7 @@ public class Scanner2 extends AppCompatActivity {
     String rawValue;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+    private int count = 0;
 
 
     @Override
@@ -172,6 +176,4 @@ public class Scanner2 extends AppCompatActivity {
     private void printData(String value) {
         Toast.makeText(this, value,Toast.LENGTH_SHORT).show();
     }
-
-
 }

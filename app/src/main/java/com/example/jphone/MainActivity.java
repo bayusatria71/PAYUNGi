@@ -34,7 +34,7 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
     Button returnButton, logoutButton,scanButton;
-    ImageView gambar;
+    ImageView gambar, historyButton;
     FirebaseAuth mAuth;
     private GoogleMap mMap;
     Location currentLocation;
@@ -56,6 +56,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         // generateButton = findViewById(R.id.generateButton);
         logoutButton = findViewById(R.id.logoutButton);
         gambar = findViewById(R.id.gambar);
+        historyButton = findViewById(R.id.historyButton);
         scanButton = findViewById(R.id.scanButton);
         returnButton = findViewById(R.id.returnButton);
         mAuth = FirebaseAuth.getInstance();
@@ -116,6 +117,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 startActivity(new Intent(getApplicationContext(),Scanner2.class));
             }
         });
+
+        historyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),History.class));
+            }
+        });
     }
     private void fetchLastLocation()
     {
@@ -132,7 +140,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     currentLocation = location;
                     latitude = currentLocation.getLatitude();
                     longitude = currentLocation.getLongitude();
-                    Toast.makeText(getApplicationContext(),latitude+""+longitude, Toast.LENGTH_SHORT).show();
                     SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     supportMapFragment.getMapAsync(MainActivity.this);
 
@@ -149,14 +156,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         googleMap.setMyLocationEnabled(true);
-        // Add a marker in Sydney and move the camera
         LatLng latLng = new LatLng(latitude, longitude);
-        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Here");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
-        googleMap.addMarker(markerOptions);
     }
 
     @Override

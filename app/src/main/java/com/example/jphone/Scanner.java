@@ -175,7 +175,7 @@ public class Scanner extends AppCompatActivity {
                                                     });
                                         } else {
                                             printData("Masih Meminjam");
-                                        }
+                                            }
                                         }
                                     }
 
