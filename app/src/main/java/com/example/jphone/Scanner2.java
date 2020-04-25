@@ -140,7 +140,8 @@ public class Scanner2 extends AppCompatActivity {
                                                         Map<String, Object> map = new HashMap<>();
                                                         DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
                                                         String date = df.format(Calendar.getInstance().getTime());
-                                                        map.put("Tanggal Dikembalikan", date);
+                                                        map.put("tanggalPeminjaman",d.getString("Tanggal Peminjamans"));
+                                                        map.put("tanggalDikembalikan", date);
                                                         map.put("Status",true);
                                                         DocumentReference documentReferenceKid = documentReference2.collection("pengembalian").document(d.getString("Tanggal Peminjamans"));
                                                         documentReferenceKid.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
