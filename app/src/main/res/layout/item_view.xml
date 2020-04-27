@@ -12,15 +12,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp">
+
         <TextView
-            android:id="@+id/kembaliTextView"
+            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tanggal Pengembalian"
             android:layout_alignParentStart="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_below="@+id/pinjamTextView"
-            />
+            android:layout_alignParentTop="true"
+            android:text="Tanggal Peminjaman:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView1"
+            android:layout_alignParentStart="true"
+            android:text="Tanggal Pengembalian:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="14sp" />
+
         <TextView
             android:id="@+id/priceTextView"
             android:layout_width="wrap_content"
@@ -28,13 +40,29 @@
             android:text="Price"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/kembaliTextView"/>
+
         <TextView
             android:id="@+id/pinjamTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:text="tanggal Peminjaman"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            android:layout_alignParentRight="true"
+
+            android:layout_marginRight="57dp"
+            android:text="Tanggal Peminjaman"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/kembaliTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pinjamTextView"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="57dp"
+            android:text="Tanggal Pengembalian"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="14sp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
