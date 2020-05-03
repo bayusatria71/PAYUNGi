@@ -5,16 +5,16 @@ import java.util.Date;
 public class Note {
     private Date tanggalPeminjaman;
     private Date tanggalDikembalikan;
-    private int harga;
+    private int price;
 
     public Note(){
-        //emmpty;
+        //
     }
 
-    public Note(Date tanggalPeminjaman, Date tanggalDikembalikan, int harga){
+    public Note(Date tanggalPeminjaman, Date tanggalDikembalikan, int price){
         this.tanggalPeminjaman = tanggalPeminjaman;
         this.tanggalDikembalikan = tanggalDikembalikan;
-        this.harga = harga;
+        this.price = price;
     }
 
     public Date getTanggalPeminjaman() {
@@ -33,11 +33,11 @@ public class Note {
         this.tanggalDikembalikan = tanggalDikembalikan;
     }
 
-    public int getHarga() {
-        return harga;
+    public int getPrice() {
+        return price;
     }
 
-    public void setHarga(int harga) {
-        this.harga = harga;
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

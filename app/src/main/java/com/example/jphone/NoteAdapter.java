@@ -25,8 +25,7 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<Note,NoteAdapter.NoteH
         DateFormat df = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
         holder.tanggalPeminjaman.setText(df.format(model.getTanggalPeminjaman()));
         holder.tanggalPengembalian.setText(df.format(model.getTanggalDikembalikan()));
-        String s = "harga : " + model.getHarga();
-        holder.priceTextView.setText(s);
+        holder.price.setText("harga :" + model.getPrice());
     }
 
     @NonNull
@@ -38,12 +37,12 @@ public class NoteAdapter extends FirestoreRecyclerAdapter<Note,NoteAdapter.NoteH
 
     class NoteHolder extends RecyclerView.ViewHolder{
         TextView tanggalPeminjaman;
-        TextView tanggalPengembalian, priceTextView;
+        TextView tanggalPengembalian, price;
         public NoteHolder(@NonNull View itemView) {
             super(itemView);
             tanggalPeminjaman = itemView.findViewById(R.id.pinjamTextView);
             tanggalPengembalian = itemView.findViewById(R.id.kembaliTextView);
-            priceTextView = itemView.findViewById(R.id.priceTextView);
+            price = itemView.findViewById(R.id.priceTextView);
         }
     }
 }
