@@ -1,32 +1,43 @@
 package com.example.jphone;
 
+import java.util.Date;
+
 public class Note {
-    private String tanggalPeminjaman;
-    private String tanggalDikembalikan;
+    private Date tanggalPeminjaman;
+    private Date tanggalDikembalikan;
     private int harga;
 
     public Note(){
         //emmpty;
     }
 
-    public Note(String tanggalPeminjaman, String tanggalDikembalikan){
+    public Note(Date tanggalPeminjaman, Date tanggalDikembalikan, int harga){
         this.tanggalPeminjaman = tanggalPeminjaman;
         this.tanggalDikembalikan = tanggalDikembalikan;
+        this.harga = harga;
     }
 
-    public String getTanggalPeminjaman() {
+    public Date getTanggalPeminjaman() {
         return tanggalPeminjaman;
     }
 
-    public void setTanggalPeminjaman(String tanggalPeminjaman) {
+    public void setTanggalPeminjaman(Date tanggalPeminjaman) {
         this.tanggalPeminjaman = tanggalPeminjaman;
     }
 
-    public String getTanggalDikembalikan() {
+    public Date getTanggalDikembalikan() {
         return tanggalDikembalikan;
     }
 
-    public void setTanggalDikembalikan(String tanggalDikembalikan) {
+    public void setTanggalDikembalikan(Date tanggalDikembalikan) {
         this.tanggalDikembalikan = tanggalDikembalikan;
+    }
+
+    public int getHarga() {
+        return harga;
+    }
+
+    public void setHarga(int harga) {
+        this.harga = harga;
     }
 }

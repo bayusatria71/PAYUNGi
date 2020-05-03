@@ -48,10 +48,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
 
-            android:layout_marginRight="57dp"
+            android:layout_marginRight="6dp"
             android:text="Tanggal Peminjaman"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/kembaliTextView"
@@ -59,10 +59,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/pinjamTextView"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="57dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="6dp"
             android:text="Tanggal Pengembalian"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

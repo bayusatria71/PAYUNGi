@@ -49,6 +49,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -156,10 +157,10 @@ public class Scanner extends AppCompatActivity {
                                         }
                                         if (status) {
                                             DocumentReference documentReference = db.collection("Borrow").document(rawValue);
-                                            DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
-                                            String date = df.format(Calendar.getInstance().getTime());
-                                            Map<String, Object> map = new HashMap<>();
-                                            map.put("Tanggal Peminjamans", date);
+                                            DateFormat df = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+                                            Calendar calendar = Calendar.getInstance();
+                                            Map<String, Date> map = new HashMap<>();
+                                            map.put("Tanggal Peminjamans", calendar.getTime());
                                             documentReference.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {

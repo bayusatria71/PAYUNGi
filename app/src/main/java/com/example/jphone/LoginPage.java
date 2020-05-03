@@ -2,8 +2,11 @@ package com.example.jphone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,12 +24,17 @@ public class LoginPage extends AppCompatActivity {
     TextView accountText;
     Button loginButton;
     EditText inputEmail,inputPassword;
+    private static final int REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+
+        }
 
 
     mAuth = FirebaseAuth.getInstance();
@@ -34,7 +42,11 @@ public class LoginPage extends AppCompatActivity {
     loginButton = findViewById(R.id.loginButton);
     inputEmail = findViewById(R.id.inputEmail);
     inputPassword = findViewById(R.id.inputPassword);
-
+        if(mAuth.getCurrentUser() != null){
+            Toast.makeText(this, "Logged in as "+ mAuth.getCurrentUser(),Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            finish();
+        }
     accountText.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {

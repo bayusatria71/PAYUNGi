@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,6 +38,7 @@ import org.w3c.dom.Document;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +55,8 @@ public class Scanner2 extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     private int count = 0;
+    Date date;
+    Date databasedate;
 
 
     @Override
@@ -73,7 +77,7 @@ public class Scanner2 extends AppCompatActivity {
         backButton  = findViewById(R.id.backButton2);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-
+        FirebaseUser user = mAuth.getCurrentUser();
         options = new FirebaseVisionBarcodeDetectorOptions.Builder()
                         .setBarcodeFormats(
                                 FirebaseVisionBarcode.FORMAT_QR_CODE,
@@ -139,11 +143,15 @@ public class Scanner2 extends AppCompatActivity {
                                                         DocumentReference documentReference2 = db.collection("Return").document(rawValue);
                                                         Map<String, Object> map = new HashMap<>();
                                                         DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
-                                                        String date = df.format(Calendar.getInstance().getTime());
-                                                        map.put("tanggalPeminjaman",d.getString("Tanggal Peminjamans"));
+                                                        date = Calendar.getInstance().getTime();
+                                                        databasedate = d.getDate("Tanggal Peminjamans");
+                                                        Long price = Math.abs(databasedate.getTime() - date.getTime());
+                                                        long diff = (price / (60000));
+                                                        long val = 10000 + (diff/10)*10000;
+                                                        map.put("tanggalPeminjaman",databasedate);
                                                         map.put("tanggalDikembalikan", date);
-                                                        map.put("Status",true);
-                                                        DocumentReference documentReferenceKid = documentReference2.collection("pengembalian").document(d.getString("Tanggal Peminjamans"));
+                                                        map.put("price", val);
+                                                        DocumentReference documentReferenceKid = documentReference2.collection("pengembalian").document(databasedate.toString());
                                                         documentReferenceKid.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
