@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -28,15 +29,25 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
     Button returnButton, logoutButton,scanButton;
+    TextView balance;
     ImageView gambar, historyButton;
     FirebaseAuth mAuth;
+    FirebaseFirestore db;
+    FirebaseUser user;
     private GoogleMap mMap;
+    private int balances;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     public double longitude,latitude;
@@ -54,15 +65,18 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         // generateButton = findViewById(R.id.generateButton);
+        balance = findViewById(R.id.balanceView);
         logoutButton = findViewById(R.id.logoutButton);
         gambar = findViewById(R.id.gambar);
         historyButton = findViewById(R.id.historyButton);
         scanButton = findViewById(R.id.scanButton);
         returnButton = findViewById(R.id.returnButton);
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-        FirebaseUser user = mAuth.getInstance().getCurrentUser();
+        user = mAuth.getInstance().getCurrentUser();
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        countBalance();
         fetchLastLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -125,6 +139,24 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+    private void countBalance() {
+        db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                if(!queryDocumentSnapshots.isEmpty()){
+                    List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                    for(DocumentSnapshot d : list){
+                        if(d.getId().equals(user.getUid())){
+                           balance.setText("Rp. " + d.getLong("Balance"));
+                           break;
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     private void fetchLastLocation()
     {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -173,4 +205,5 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 break;
         }
     }
+
 }

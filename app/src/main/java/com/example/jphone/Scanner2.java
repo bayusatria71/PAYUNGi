@@ -54,7 +54,11 @@ public class Scanner2 extends AppCompatActivity {
     String rawValue;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
+    FirebaseUser user;
+    boolean status;
+    long balances;
     private int count = 0;
+    private long val;
     Date date;
     Date databasedate;
 
@@ -77,7 +81,7 @@ public class Scanner2 extends AppCompatActivity {
         backButton  = findViewById(R.id.backButton2);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         options = new FirebaseVisionBarcodeDetectorOptions.Builder()
                         .setBarcodeFormats(
                                 FirebaseVisionBarcode.FORMAT_QR_CODE,
@@ -128,50 +132,84 @@ public class Scanner2 extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
                         @Override
                         public void onSuccess(List<FirebaseVisionBarcode> barcodes) {
+                            long balancesSuccess;
                             for (FirebaseVisionBarcode barcode: barcodes) {
                                 rawValue = barcode.getRawValue();
-                                printData(rawValue);
                             }
-                            db.collection("Borrow").get()
-                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                            if(!queryDocumentSnapshots.isEmpty()){
-                                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                                                for(DocumentSnapshot d : list){
-                                                    if(d.getId().equals(rawValue)){
-                                                        DocumentReference documentReference2 = db.collection("Return").document(rawValue);
-                                                        Map<String, Object> map = new HashMap<>();
-                                                        DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
-                                                        date = Calendar.getInstance().getTime();
-                                                        databasedate = d.getDate("Tanggal Peminjamans");
-                                                        Long price = Math.abs(databasedate.getTime() - date.getTime());
-                                                        long diff = (price / (60000));
-                                                        long val = 10000 + (diff/10)*10000;
-                                                        map.put("tanggalPeminjaman",databasedate);
-                                                        map.put("tanggalDikembalikan", date);
-                                                        map.put("price", val);
-                                                        DocumentReference documentReferenceKid = documentReference2.collection("pengembalian").document(databasedate.toString());
-                                                        documentReferenceKid.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                            @Override
-                                                            public void onSuccess(Void aVoid) {
-                                                                printData("berhasil");
-
-                                                            }
-                                                        });
-                                                        db.collection("Borrow").document(rawValue).delete();
-                                                        break;
-                                                    } else {
-                                                        printData("Tidak ada yang sama");
-                                                    }
-                                                }
-                                            } else {
-                                                printData("tidak ada peminjaman");
+                            db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if(!queryDocumentSnapshots.isEmpty()){
+                                        List<DocumentSnapshot> lists = queryDocumentSnapshots.getDocuments();
+                                        for(DocumentSnapshot f : lists){
+                                            if(f.getId().equals(rawValue)){
+                                                balances = (long) f.get("Balance");
+                                                add();
+                                                break;
                                             }
                                         }
-                                    });
+                                    }
+                                }
+
+                                private void add() {
+                                    db.collection("Borrow").get()
+                                            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                @Override
+                                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                    if(!queryDocumentSnapshots.isEmpty()){
+                                                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                                        for(DocumentSnapshot d : list){
+                                                            if(d.getId().equals(rawValue)){
+                                                                DocumentReference documentReference2 = db.collection("Return").document(rawValue);
+                                                                Map<String, Object> map = new HashMap<>();
+                                                                date = Calendar.getInstance().getTime();
+                                                                databasedate = d.getDate("Tanggal Peminjamans");
+                                                                long price = Math.abs(databasedate.getTime() - date.getTime());
+                                                                long diff = (price / (60000));
+                                                                val = 10000 + (diff/10)*10000;
+                                                                Toast.makeText(Scanner2.this, "dalam add: " + balances, Toast.LENGTH_SHORT).show();
+                                                                if(balances < val){
+                                                                Toast.makeText(Scanner2.this, "Kurang" + balances, Toast.LENGTH_SHORT).show();
+                                                                    break;
+                                                                }
+                                                                long pass = balances - val;
+                                                                setBalance(pass);
+                                                                map.put("tanggalPeminjaman",databasedate);
+                                                                map.put("tanggalDikembalikan", date);
+                                                                map.put("price", val);
+                                                                DocumentReference documentReferenceKid = documentReference2.collection("pengembalian").document(databasedate.toString());
+                                                                documentReferenceKid.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void aVoid) {
+                                                                        printData("berhasil");
+                                                                    }
+                                                                });
+                                                                db.collection("Borrow").document(rawValue).delete();
+                                                                break;
+                                                            } else {
+                                                                printData("Tidak ada yang sama");
+                                                            }
+                                                        }
+                                                    } else {
+                                                        printData("tidak ada peminjaman");
+                                                    }
+                                                }
+
+
+                                                private void setBalance(long pass) {
+                                                    DocumentReference setVal = db.collection("Users").document(rawValue);
+                                                    Map<String, Object> value = new HashMap<>();
+                                                    value.put("Balance",pass);
+                                                    setVal.update(value);
+                                                }
+                                            });
+                                }
+                            });
+
+
                             }
                     })
+
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {

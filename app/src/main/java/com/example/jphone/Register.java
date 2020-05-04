@@ -39,6 +39,7 @@ public class Register extends AppCompatActivity {
     String date,phone;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
+    final static int balance =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +100,7 @@ public class Register extends AppCompatActivity {
                         user.put("Email",email);
                         user.put("Phone",phone);
                         user.put("Birth Date",date);
+                        user.put("Balance", balance);
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

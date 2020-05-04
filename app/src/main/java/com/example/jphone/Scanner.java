@@ -147,7 +147,8 @@ public class Scanner extends AppCompatActivity {
                                     if(!queryDocumentSnapshots.isEmpty()) {
                                         List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                                         for (DocumentSnapshot element : list) {
-                                            if (rawValue.equals(element.getId())) {
+                                            String s = element.getId();
+                                            if (rawValue.equals(s)) {
                                                 status = false;
                                                 break;
                                             }
