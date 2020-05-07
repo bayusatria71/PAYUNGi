@@ -167,9 +167,10 @@ public class Scanner2 extends AppCompatActivity {
                                                                 long price = Math.abs(databasedate.getTime() - date.getTime());
                                                                 long diff = (price / (60000));
                                                                 val = 10000 + (diff/10)*10000;
-                                                                Toast.makeText(Scanner2.this, "dalam add: " + balances, Toast.LENGTH_SHORT).show();
                                                                 if(balances < val){
-                                                                Toast.makeText(Scanner2.this, "Kurang" + balances, Toast.LENGTH_SHORT).show();
+                                                                    String kurang = "Balance anda : " + balances + "\nBiaya yang diperlukan : " + val + "\nSilahkan Topup sesuai biaya yang dibutuhkan";
+                                                                    ExampleDialog exmaple = new ExampleDialog("Fund Required",kurang);
+                                                                    exmaple.show(getSupportFragmentManager(),"Contoh");
                                                                     break;
                                                                 }
                                                                 long pass = balances - val;
@@ -193,6 +194,10 @@ public class Scanner2 extends AppCompatActivity {
                                                     } else {
                                                         printData("tidak ada peminjaman");
                                                     }
+                                                }
+
+                                                private void openDialog() {
+
                                                 }
 
 
