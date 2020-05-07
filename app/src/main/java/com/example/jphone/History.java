@@ -29,7 +29,6 @@ public class History extends AppCompatActivity {
         FirebaseUser user = fAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
         ref = db.collection("Return").document(user.getUid()).collection("pengembalian");
-        Toast.makeText(this, user.getUid(), Toast.LENGTH_SHORT).show();
         setUpRecyclerView();
     }
 

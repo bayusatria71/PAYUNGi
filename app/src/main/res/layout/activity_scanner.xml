@@ -8,14 +8,15 @@
 
     <Button
         android:id="@+id/scanBarcode"
-        android:layout_width="335dp"
-        android:layout_height="62dp"
-        android:text="SCAN"
+        android:layout_width="154dp"
+        android:layout_height="51dp"
+        android:text="RE-SCAN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.847" />
+        app:layout_constraintVertical_bias="0.836" />
 
     <Button
         android:id="@+id/backButton"
@@ -24,22 +25,44 @@
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958" />
+        app:layout_constraintVertical_bias="0.937" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="241dp"
-        android:layout_height="253dp"
-        android:layout_marginStart="86dp"
-        android:layout_marginTop="244dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="157dp"
-        app:layout_constraintBottom_toTopOf="@+id/scanBarcode"
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="416dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
+
+    <TextView
+        android:id="@+id/textViewImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find QR Codes"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:layout_constraintTop_toBottomOf="@+id/surfaceView"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="241dp"-->
+<!--        android:layout_height="253dp"-->
+<!--        android:layout_marginStart="86dp"-->
+<!--        android:layout_marginTop="244dp"-->
+<!--        android:layout_marginEnd="84dp"-->
+<!--        android:layout_marginBottom="157dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/scanBarcode"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:srcCompat="@drawable/ic_launcher_background" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
