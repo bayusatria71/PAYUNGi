@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -42,7 +43,7 @@ import androidmads.library.qrgenearator.QRGEncoder;
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback {
     Button returnButton, logoutButton,scanButton;
     TextView balance;
-    ImageView gambar, historyButton;
+    ImageView gambar, historyButton,showQrCode;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     FirebaseUser user;
@@ -52,6 +53,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     FusedLocationProviderClient fusedLocationProviderClient;
     public double longitude,latitude;
     private static final int REQUEST_CODE = 101;
+    Dialog dialog;
 
 
     @Override
@@ -65,7 +67,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         // generateButton = findViewById(R.id.generateButton);
+        dialog = new Dialog(this);
         balance = findViewById(R.id.balanceView);
+        showQrCode = findViewById(R.id.qrCodeShow);
         logoutButton = findViewById(R.id.logoutButton);
         gambar = findViewById(R.id.gambar);
         historyButton = findViewById(R.id.historyButton);
@@ -83,14 +87,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-        String qrid = user.getUid();
-        QRGEncoder qrgEncoder = new QRGEncoder(qrid, null, QRGContents.Type.TEXT, 500);
-        try {
-            Bitmap qrBits = qrgEncoder.getBitmap();
-            gambar.setImageBitmap(qrBits);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
 
  /*       generateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +133,32 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),History.class));
+            }
+        });
+
+        showQrCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImageView qrCode;
+                Button kembaliMenu;
+                dialog.setContentView(R.layout.custom_popups);
+                qrCode = (ImageView) dialog.findViewById(R.id.qrCode);
+                kembaliMenu = (Button) dialog.findViewById(R.id.kembaliMenu);
+                String qrid = user.getUid();
+                QRGEncoder qrgEncoder = new QRGEncoder(qrid, null, QRGContents.Type.TEXT, 1000);
+                try {
+                    Bitmap qrBits = qrgEncoder.getBitmap();
+                    qrCode.setImageBitmap(qrBits);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                kembaliMenu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
     }

@@ -22,18 +22,27 @@ import android.hardware.camera2.CameraManager;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -60,6 +69,7 @@ public class Scanner extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 101;
     ImageView cameraView;
     Button scanBarcode,backButton;
+    TextView textView;
     AlertDialog waitingDialog;
     FirebaseVisionImage image;
     FirebaseVisionBarcodeDetectorOptions options;
@@ -68,6 +78,8 @@ public class Scanner extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     private boolean status;
+    BarcodeDetector barcodeDetector;
+    CameraSource cameraSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +99,7 @@ public class Scanner extends AppCompatActivity {
         backButton  = findViewById(R.id.backButton);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
 
         options = new FirebaseVisionBarcodeDetectorOptions.Builder()
                         .setBarcodeFormats(
@@ -158,7 +171,6 @@ public class Scanner extends AppCompatActivity {
                                         }
                                         if (status) {
                                             DocumentReference documentReference = db.collection("Borrow").document(rawValue);
-                                            DateFormat df = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
                                             Calendar calendar = Calendar.getInstance();
                                             Map<String, Date> map = new HashMap<>();
                                             map.put("Tanggal Peminjamans", calendar.getTime());
@@ -177,12 +189,11 @@ public class Scanner extends AppCompatActivity {
                                                     });
                                         } else {
                                             printData("Masih Meminjam");
-                                            }
                                         }
                                     }
+                                }
 
                             });
-
                                 }
                             });
 
@@ -194,3 +205,6 @@ public class Scanner extends AppCompatActivity {
     }
 
 }
+
+
+
