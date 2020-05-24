@@ -44,8 +44,6 @@ import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
 public class MainActivity extends FragmentActivity {
-    Dialog popUpQrCode;
-    ImageView qrCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +75,9 @@ public class MainActivity extends FragmentActivity {
                             QrCodeBottomSheet qrSheet = new QrCodeBottomSheet();
                             qrSheet.show(getSupportFragmentManager(), "QR Code");
                             return true;
-
+                        case R.id.inbox_menu:
+                            selectedFragment = new InboxFragment();
+                            break;
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, selectedFragment).commit();

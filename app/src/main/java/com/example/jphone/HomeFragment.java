@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,7 +41,6 @@ import java.util.List;
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     private static final int REQUEST_CODE = 101;
-
     private GoogleMap mMap;
     public double longitude, latitude;
     Location currentLocation;
@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     FirebaseUser user;
 
     Button returnButton, logoutButton,scanButton;
+    ImageView transferButton;
     TextView balance;
 
     @Nullable
@@ -62,6 +63,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         logoutButton = homePage.findViewById(R.id.logoutButton);
         scanButton = homePage.findViewById(R.id.scanButton);
         returnButton = homePage.findViewById(R.id.returnButton);
+        transferButton = homePage.findViewById(R.id.transferButton);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -78,22 +80,27 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View y) {
                 mAuth.getInstance().signOut();
                 startActivity(new Intent(getContext(), LoginPage.class));
-//                finish();
             }
         });
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),Scanner.class));
-//                finish();
+                startActivity(new Intent(getContext(), Scanner.class));
             }
         });
 
         returnButton.setOnClickListener(    new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(),Scanner2.class));
+                startActivity(new Intent(getContext(), Scanner2.class));
+            }
+        });
+
+        transferButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), TransferActivity.class));
             }
         });
 
@@ -121,7 +128,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private void fetchLastLocation()
     {
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
@@ -160,7 +167,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE:
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     fetchLastLocation();
                 }
                 break;
