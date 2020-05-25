@@ -8,19 +8,22 @@
 
     <item
         android:id="@+id/history_menu"
-        android:icon="@drawable/ic_history"
-        android:title="History"/>
+        android:icon="@drawable/ic_umbrella"
+        android:title="Activities"/>
 
     <item
         android:id="@+id/rent_button"
+        android:icon="@drawable/ic_qr_code"
         android:title="Rent"/>
 
     <item
         android:id="@+id/inbox_menu"
+        android:icon="@drawable/ic_inbox"
         android:title="Inbox"/>
 
     <item
         android:id="@+id/account_menu"
+        android:icon="@drawable/ic_account"
         android:title="Account"/>
 
 </menu>

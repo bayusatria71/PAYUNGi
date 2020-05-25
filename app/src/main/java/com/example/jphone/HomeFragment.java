@@ -36,6 +36,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
@@ -50,8 +51,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     FirebaseFirestore db;
     FirebaseUser user;
 
-    Button returnButton, logoutButton,scanButton;
-    ImageView transferButton;
+    ImageView btnTransfer, btnReward, btnTopUp;
     TextView balance;
 
     @Nullable
@@ -60,10 +60,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         View homePage = inflater.inflate(R.layout.frag_home, container, false);
 
         balance = homePage.findViewById(R.id.balanceView);
-        logoutButton = homePage.findViewById(R.id.logoutButton);
-        scanButton = homePage.findViewById(R.id.scanButton);
-        returnButton = homePage.findViewById(R.id.returnButton);
-        transferButton = homePage.findViewById(R.id.transferButton);
+        btnTransfer = homePage.findViewById(R.id.btnTransfer);
+        btnReward = homePage.findViewById(R.id.btnReward);
+        btnTopUp = homePage.findViewById(R.id.btnTopUp);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -75,29 +74,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View y) {
-                mAuth.getInstance().signOut();
-                startActivity(new Intent(getContext(), LoginPage.class));
-            }
-        });
-
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), Scanner.class));
-            }
-        });
-
-        returnButton.setOnClickListener(    new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), Scanner2.class));
-            }
-        });
-
-        transferButton.setOnClickListener(new View.OnClickListener() {
+        btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), TransferActivity.class));
@@ -109,6 +86,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void countBalance() {
+        final DecimalFormat rupiah = new DecimalFormat("Rp###,###.00");
         db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -116,7 +94,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
                     for(DocumentSnapshot d : list){
                         if(d.getId().equals(user.getUid())){
-                            balance.setText("Rp. " + d.getLong("Balance"));
+                            balance.setText(rupiah.format(d.getLong("Balance")));
                             break;
                         }
                     }

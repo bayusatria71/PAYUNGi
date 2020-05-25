@@ -78,6 +78,9 @@ public class MainActivity extends FragmentActivity {
                         case R.id.inbox_menu:
                             selectedFragment = new InboxFragment();
                             break;
+                        case R.id.account_menu:
+                            selectedFragment = new AccountFragment();
+                            break;
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, selectedFragment).commit();

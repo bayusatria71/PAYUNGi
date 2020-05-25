@@ -15,10 +15,10 @@
             android:id="@+id/tvHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Inbox"
+            android:text="My Activity"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPallete2"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:layout_marginTop="30dp"
             android:layout_marginStart="30dp"
             android:layout_marginBottom="10dp"/>
@@ -33,9 +33,10 @@
         android:background="@drawable/roundedcorner_layout"
         app:tabTextColor="@color/colorPallete2"
         app:tabSelectedTextColor="#FFFFFF"
+        app:tabMode="fixed"
         android:elevation="0dp"/>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/tabContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

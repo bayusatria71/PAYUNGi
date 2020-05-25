@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <fragment
         android:id="@+id/map"
@@ -18,63 +19,125 @@
         android:layout_height="215dp"
         android:background="@drawable/roundedcorner_layout">
 
-        <ImageView
-            android:id="@+id/transferButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_send"
-            android:layout_marginStart="50dp"
-            android:layout_marginBottom="40dp"
-            android:layout_alignParentBottom="true"/>
-
-        <ImageView
-            android:id="@+id/topupButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/ic_add_circle_black_24dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="40dp"
+        <GridLayout
+            android:id="@+id/headerMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="40dp"
+            android:columnCount="3"
+            android:rowCount="2"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/logoutButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_shape"
-            android:backgroundTint="@color/colorPallete2"
-            android:text="Logout"
+            <ImageView
+                android:id="@+id/btnTopUp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_top_up"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:layout_gravity="fill"/>
+
+            <ImageView
+                android:id="@+id/btnTransfer"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_send"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:layout_gravity="fill"/>
+
+            <ImageView
+                android:id="@+id/btnReward"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_reward"
+                android:layout_column="2"
+                android:layout_row="0"
+                android:layout_gravity="fill"/>
+
+            <TextView
+                android:id="@+id/tvTopUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Top Up"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_gravity="center_horizontal"
+                android:layout_column="0"
+                android:layout_row="1"
+                android:layout_columnWeight="1"/>
+
+            <TextView
+                android:id="@+id/tvTransfer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transfer"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_gravity="center_horizontal"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:layout_columnWeight="1"/>
+
+            <TextView
+                android:id="@+id/tvReward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reward"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_gravity="center_horizontal"
+                android:layout_column="2"
+                android:layout_row="1"
+                android:layout_columnWeight="1"/>
+
+        </GridLayout>
+
+
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@id/headerMenu"
+            android:src="@drawable/ic_person"
+            android:background="@drawable/border"
+            android:padding="5dp"/>
+
+        <ImageView
+            android:id="@+id/ivPayungiLogo"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_alignParentEnd="true"
-            android:layout_margin="30dp"/>
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/payungi_logo"/>
 
-        <Button
-            android:id="@+id/returnButton"
+        <TextView
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_shape"
-            android:backgroundTint="@color/colorPallete2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:text="RETURN"/>
-
-        <Button
-            android:id="@+id/scanButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_shape"
-            android:backgroundTint="@color/colorPallete2"
-            android:layout_alignParentStart="true"
-            android:layout_margin="30dp"
-            android:text="SCAN"/>
+            android:textSize="18sp"
+            android:text="Username"
+            android:textColor="#000000"
+            android:layout_toEndOf="@id/ivProfilePicture"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="10dp"/>
 
         <TextView
             android:id="@+id/balanceView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Rp. 0"
-            android:layout_below="@id/returnButton"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="16sp"
+            android:text="Rp0.00"
+            android:textColor="#000000"
+            android:layout_alignStart="@id/tvName"
+            android:layout_below="@id/tvName"
+            android:layout_marginTop="8dp"/>
 
     </RelativeLayout>
 

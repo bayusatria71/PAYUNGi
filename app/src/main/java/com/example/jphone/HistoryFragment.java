@@ -15,16 +15,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -57,8 +61,7 @@ public class HistoryFragment extends Fragment {
 
     private TabLayout tabMenu;
     private AppBarLayout titleBar;
-    private ViewPager tabContainer;
-    private TabAdapter adapter;
+    private ViewPager2 tabContainer;
 
     @Nullable
     @Override
@@ -68,9 +71,30 @@ public class HistoryFragment extends Fragment {
         tabContainer = historyFragment.findViewById(R.id.tabContainer);
         tabMenu = historyFragment.findViewById(R.id.tabMenu);
         titleBar = historyFragment.findViewById(R.id.appBar);
-        adapter = new TabAdapter(getFragmentManager());
+        titleBar.setOutlineProvider(null);
+        tabMenu.setSelectedTabIndicator(null);
 
-        loadHistory();
+
+        TabAdapter adapter = new TabAdapter(getActivity());
+        tabContainer.setAdapter(adapter);
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
+                tabMenu, tabContainer, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                if (position == 0)
+                {
+                    tab.setText("Ongoing");
+                }
+                else
+                {
+                    tab.setText("History");
+                }
+            }
+        }
+        );
+        tabLayoutMediator.attach();
+
+//        loadHistory();
 
 //        Toast.makeText(getContext(), user.getUid(), Toast.LENGTH_SHORT).show();
 //        setUpRecyclerView(activityPage);
@@ -78,64 +102,46 @@ public class HistoryFragment extends Fragment {
         return historyFragment;
     }
 
-    public void loadHistory()
+//    public void loadHistory()
+//    {
+//        FirebaseUser user = fAuth.getInstance().getCurrentUser();
+//        db = FirebaseFirestore.getInstance();
+//        historyReference = db.collection("Return").document(user.getUid()).collection("pengembalian");
+//        historyReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//            @Override
+//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//
+//                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots)
+//                {
+//                    Note note = documentSnapshot.toObject(Note.class);
+//
+//                    borrowDate.add(note.getTanggalPeminjaman());
+//                    returnDate.add(note.getTanggalDikembalikan());
+//                    price.add(note.getPrice());
+//                }
+//
+//            }
+//        });
+//    }
+
+    private static class TabAdapter extends FragmentStateAdapter
     {
-        FirebaseUser user = fAuth.getInstance().getCurrentUser();
-        db = FirebaseFirestore.getInstance();
-        historyReference = db.collection("Return").document(user.getUid()).collection("pengembalian");
-        historyReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots)
-                {
-                    Note note = documentSnapshot.toObject(Note.class);
-
-                    borrowDate.add(note.getTanggalPeminjaman());
-                    returnDate.add(note.getTanggalDikembalikan());
-                    price.add(note.getPrice());
-                }
-
-                adapter.addFragment(new OngoingTabFragment(borrowDate, returnDate, price), "Ongoing");
-                adapter.addFragment(new HistoryTabFragment(borrowDate, returnDate, price), "History");
-                titleBar.setOutlineProvider(null);
-                tabContainer.setAdapter(adapter);
-                tabMenu.setupWithViewPager(tabContainer);
-                tabMenu.setSelectedTabIndicator(null);
-            }
-        });
-    }
-
-    private class TabAdapter extends FragmentPagerAdapter
-    {
-        private final List<Fragment> fragmentList = new ArrayList<>();
-        private final List<String> fragmentTitleList = new ArrayList<>();
-
-        public TabAdapter(FragmentManager fm) {
-            super(fm);
+        TabAdapter(@NonNull FragmentActivity fragmentActivity) {
+            super(fragmentActivity);
         }
 
         @NonNull
         @Override
-        public Fragment getItem(int position) {
-            return fragmentList.get(position);
+        public Fragment createFragment(int position) {
+            if (position == 0) {
+                return new OngoingTabFragment();
+            }
+            return new HistoryTabFragment();
         }
 
         @Override
-        public int getCount() {
-            return fragmentList.size();
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return fragmentTitleList.get(position);
-        }
-
-        public void addFragment(Fragment fragment, String title)
-        {
-            fragmentList.add(fragment);
-            fragmentTitleList.add(title);
+        public int getItemCount() {
+            return 2;
         }
     }
 
