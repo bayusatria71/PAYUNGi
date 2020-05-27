@@ -55,7 +55,6 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOption
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -68,8 +67,7 @@ import io.opencensus.tags.Tag;
 
 public class Scanner extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 101;
-//    ImageView cameraView;
-    SurfaceView cameraView;
+    ImageView cameraView;
     Button scanBarcode,backButton;
     TextView textView;
     AlertDialog waitingDialog;
@@ -77,13 +75,11 @@ public class Scanner extends AppCompatActivity {
     FirebaseVisionBarcodeDetectorOptions options;
     FirebaseVisionBarcodeDetector detector;
     String rawValue;
-    private boolean firstDetected = true;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     private boolean status;
     BarcodeDetector barcodeDetector;
     CameraSource cameraSource;
-    SparseArray<Barcode> qrCodes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,107 +93,23 @@ public class Scanner extends AppCompatActivity {
                     new String[]{Manifest.permission.CAMERA},
                     MY_PERMISSIONS_REQUEST_READ_CONTACTS);
         }
-        textView = findViewById(R.id.textViewImage);
-        cameraView = findViewById(R.id.surfaceView);
+
+        cameraView = findViewById(R.id.imageView);
         scanBarcode = findViewById(R.id.scanBarcode);
         backButton  = findViewById(R.id.backButton);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        scanBarcode.setVisibility(View.INVISIBLE);
-        barcodeDetector = new BarcodeDetector.Builder(this)
-                .setBarcodeFormats(Barcode.QR_CODE).build();
 
-        cameraSource = new CameraSource.Builder(this,barcodeDetector)
-                .setRequestedPreviewSize(1280,720).build();
 
-        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder surfaceHolder) {
-                try {
-                    cameraSource.start(surfaceHolder);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-                cameraSource.stop();
-            }
-        });
-
-        barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
-            @Override
-            public void release() {
-
-            }
-
-            @Override
-            public void receiveDetections(Detector.Detections<Barcode> detections) {
-                qrCodes = detections.getDetectedItems();
-                if(qrCodes.size() != 0 && firstDetected) {
-                    firstDetected = false;
-                    db.collection("Borrow").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                        @Override
-                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                            if (!queryDocumentSnapshots.isEmpty()) {
-                                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-                                for (DocumentSnapshot element : list) {
-                                    String s = element.getId();
-                                    if (s.equals(qrCodes.valueAt(0).displayValue)) {
-                                        status = false;
-                                        break;
-                                    } else {
-                                        status = true;
-                                    }
-                                }
-                                if (status) {
-                                    DocumentReference documentReference = db.collection("Borrow").document(qrCodes.valueAt(0).displayValue);
-                                    Calendar calendar = Calendar.getInstance();
-                                    Map<String, Date> map = new HashMap<>();
-                                    map.put("Tanggal Peminjamans", calendar.getTime());
-                                    documentReference.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            textView.setText(qrCodes.valueAt(0).displayValue);
-                                            scanBarcode.setVisibility(View.VISIBLE);
-                                        }
-                                    })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                                    finish();
-                                                }
-                                            });
-                                } else {
-                                    textView.setText(qrCodes.valueAt(0).displayValue);
-                                    printData("Masih Meminjam");
-                                    scanBarcode.setVisibility(View.VISIBLE);
-                                }
-                            }
-                        }
-
-                    });
-                }
-            }
-        });
-
-//        options = new FirebaseVisionBarcodeDetectorOptions.Builder()
-//                        .setBarcodeFormats(
-//                                FirebaseVisionBarcode.FORMAT_QR_CODE,
-//                                FirebaseVisionBarcode.FORMAT_PDF417
-//                        ).build();
+        options = new FirebaseVisionBarcodeDetectorOptions.Builder()
+                        .setBarcodeFormats(
+                                FirebaseVisionBarcode.FORMAT_QR_CODE,
+                                FirebaseVisionBarcode.FORMAT_PDF417
+                        ).build();
         scanBarcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scanBarcode.setVisibility(View.INVISIBLE);
-                firstDetected = true;
+                dispatchTakePictureIntent();
             }
         });
 
@@ -213,80 +125,80 @@ public class Scanner extends AppCompatActivity {
 
 
 
-//    static final int REQUEST_IMAGE_CAPTURE = 1;
-//
-//    private void dispatchTakePictureIntent() {
-//        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//        }
-//    }
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode,resultCode,data);
-//
-//        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            cameraView.setImageBitmap(imageBitmap);
-//            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
-//            detector = FirebaseVision.getInstance()
-//                    .getVisionBarcodeDetector(options);
-//
-//
-//            Task<List<FirebaseVisionBarcode>> result = detector.detectInImage(image)
-//                    .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
-//                        @Override
-//                        public void onSuccess(List<FirebaseVisionBarcode> barcodes) {
-//                            for (FirebaseVisionBarcode barcode: barcodes) {
-//                                rawValue = barcode.getRawValue();
-//                            }
-//                            db.collection("Borrow").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                                @Override
-//                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                                    if(!queryDocumentSnapshots.isEmpty()) {
-//                                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
-//                                        for (DocumentSnapshot element : list) {
-//                                            String s = element.getId();
-//                                            if (rawValue.equals(s)) {
-//                                                status = false;
-//                                                break;
-//                                            }
-//                                            else {
-//                                                status = true;
-//                                            }
-//                                        }
-//                                        if (status) {
-//                                            DocumentReference documentReference = db.collection("Borrow").document(rawValue);
-//                                            Calendar calendar = Calendar.getInstance();
-//                                            Map<String, Date> map = new HashMap<>();
-//                                            map.put("Tanggal Peminjamans", calendar.getTime());
-//                                            documentReference.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                @Override
-//                                                public void onSuccess(Void aVoid) {
-//                                                    printData(rawValue);
-//                                                }
-//                                            })
-//                                                    .addOnFailureListener(new OnFailureListener() {
-//                                                        @Override
-//                                                        public void onFailure(@NonNull Exception e) {
-//                                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                                                            finish();
-//                                                        }
-//                                                    });
-//                                        } else {
-//                                            printData("Masih Meminjam");
-//                                        }
-//                                    }
-//                                }
-//
-//                            });
-//                                }
-//                            });
-//
-//        }
-//    }
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            cameraView.setImageBitmap(imageBitmap);
+            FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(imageBitmap);
+            detector = FirebaseVision.getInstance()
+                    .getVisionBarcodeDetector(options);
+
+
+            Task<List<FirebaseVisionBarcode>> result = detector.detectInImage(image)
+                    .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
+                        @Override
+                        public void onSuccess(List<FirebaseVisionBarcode> barcodes) {
+                            for (FirebaseVisionBarcode barcode: barcodes) {
+                                rawValue = barcode.getRawValue();
+                            }
+                            db.collection("Borrow").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    if(!queryDocumentSnapshots.isEmpty()) {
+                                        List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                                        for (DocumentSnapshot element : list) {
+                                            String s = element.getId();
+                                            if (rawValue.equals(s)) {
+                                                status = false;
+                                                break;
+                                            }
+                                            else {
+                                                status = true;
+                                            }
+                                        }
+                                        if (status) {
+                                            DocumentReference documentReference = db.collection("Borrow").document(rawValue);
+                                            Calendar calendar = Calendar.getInstance();
+                                            Map<String, Date> map = new HashMap<>();
+                                            map.put("Tanggal Peminjamans", calendar.getTime());
+                                            documentReference.set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    printData(rawValue);
+                                                }
+                                            })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                                            finish();
+                                                        }
+                                                    });
+                                        } else {
+                                            printData("Masih Meminjam");
+                                        }
+                                    }
+                                }
+
+                            });
+                                }
+                            });
+
+        }
+    }
 
     private void printData(String value) {
         Toast.makeText(this, value,Toast.LENGTH_SHORT).show();

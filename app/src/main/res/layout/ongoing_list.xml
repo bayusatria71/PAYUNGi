@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/staticBorrowDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Borrow Date"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:padding="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/staticReturnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return Date"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:padding="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_below="@+id/staticBorrowDate"/>
+
+    <TextView
+        android:id="@+id/staticPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:padding="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/staticReturnDate"/>
+
+    <TextView
+        android:id="@+id/tvBorrowDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Borrow Date)"
+        android:textSize="14sp"
+        android:textColor="@color/colorPallete2"
+        android:layout_alignTop="@+id/staticBorrowDate"
+        android:layout_alignParentEnd="true"
+        android:padding="10dp"
+        android:layout_marginEnd="8dp"/>
+
+    <TextView
+        android:id="@+id/tvReturnDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Return Date)"
+        android:textSize="14sp"
+        android:textColor="@color/colorPallete2"
+        android:layout_alignTop="@+id/staticReturnDate"
+        android:layout_alignParentEnd="true"
+        android:padding="10dp"
+        android:layout_marginEnd="8dp"/>
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Price)"
+        android:textSize="14sp"
+        android:textColor="@color/colorPallete2"
+        android:layout_alignTop="@+id/staticPrice"
+        android:layout_alignParentEnd="true"
+        android:padding="10dp"
+        android:layout_marginEnd="8dp"/>
+
+
+</RelativeLayout>

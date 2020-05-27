@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
@@ -7,8 +7,7 @@
     android:layout_height="475dp"
     android:background="#2F7565"
     android:padding="5dp"
-    android:layout_gravity="center"
-    >
+    android:layout_gravity="center">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -19,16 +18,8 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center"
-            android:layout_marginTop="35dp"
-            />
-        <Button
-            android:id="@+id/kembaliMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center"/>
+            android:layout_marginTop="35dp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>
