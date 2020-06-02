@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_person"
+        android:background="@drawable/border"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="Username"
+        android:textColor="#000000"
+        android:layout_toEndOf="@id/ivProfilePicture"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tvChangePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Edit Profile"
+        android:layout_below="@id/tvName"
+        android:layout_alignStart="@id/tvName"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/staticEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivProfilePicture"
+        android:text="Email"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPallete2"
+        android:layout_alignStart="@id/ivProfilePicture"
+        android:layout_marginTop="20dp"
+        android:paddingStart="3dp"/>
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/staticEmail"
+        android:layout_alignStart="@id/staticEmail"
+        android:layout_marginEnd="28dp"
+        android:text="Email@email.com"/>
+
+    <TextView
+        android:id="@+id/staticPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etEmail"
+        android:text="Phone Number"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPallete2"
+        android:layout_alignStart="@id/ivProfilePicture"
+        android:layout_marginTop="20dp"
+        android:paddingStart="3dp"/>
+
+    <EditText
+        android:id="@+id/etPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/staticPhoneNumber"
+        android:layout_alignStart="@id/staticPhoneNumber"
+        android:layout_marginEnd="28dp"
+        android:text="08136942069"/>
+
+    <TextView
+        android:id="@+id/staticPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPhoneNumber"
+        android:text="Password"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPallete2"
+        android:layout_alignStart="@id/ivProfilePicture"
+        android:layout_marginTop="20dp"
+        android:paddingStart="3dp"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/staticPassword"
+        android:layout_alignStart="@id/staticPassword"
+        android:layout_marginEnd="28dp"
+        android:text="08136942069"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="40dp"
+        android:text="Log Out"
+        android:textSize="16sp"
+        android:textColor="#000000"/>
+
+</RelativeLayout>

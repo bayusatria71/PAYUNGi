@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvUId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A4cas129ASAd"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@id/qrCode"
+        android:layout_alignEnd="@id/qrCode"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="08136942069"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:layout_alignStart="@id/qrCode"
+        android:layout_alignEnd="@id/qrCode"
+        android:layout_below="@id/qrCode"
+        android:gravity="center_horizontal"/>
+    <View
+        android:id="@+id/separator"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvUId"
+        android:background="@color/colorPallete2"
+        />
+    <ImageView
+        android:id="@+id/qrCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/separator"/>
+
+</RelativeLayout>
