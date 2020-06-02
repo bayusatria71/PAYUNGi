@@ -38,8 +38,11 @@ public class TransferActivity extends AppCompatActivity {
     FirebaseFirestore db;
     FirebaseUser user;
     long balanceKembali = 0l;
+<<<<<<< HEAD
     String phoneNumberUser;
     final static String PESAN_PAYUNGI = "Transaksi Berhasil diselesaikan";
+=======
+>>>>>>> manpro/master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +127,10 @@ public class TransferActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentChecker : list){
                                 if(documentChecker.getId().equals(user.getUid())){
                                     balanceKembali = (long) documentChecker.get("Balance");
+<<<<<<< HEAD
                                     phoneNumberUser = (String) documentChecker.get("Phone");
+=======
+>>>>>>> manpro/master
                                 }
                             }
                             for (DocumentSnapshot documentSnapshot : list) {
@@ -135,6 +141,7 @@ public class TransferActivity extends AppCompatActivity {
                                     DocumentReference inboxMessage = db.collection("Messages").document(documentSnapshot.getId()).collection("Inbox").document(tanggal);
                                     DocumentReference setVal = db.collection("Users").document(documentSnapshot.getId());
                                     DocumentReference minusVal = db.collection("Users").document(user.getUid());
+<<<<<<< HEAD
                                     DocumentReference inboxPengirim = db.collection("Messages").document(user.getUid()).collection("Inbox").document(tanggal);
                                     Map<String, Object> mapper = new HashMap<>();
                                     Map<String, Object> mapperKedua = new HashMap<>();
@@ -143,6 +150,11 @@ public class TransferActivity extends AppCompatActivity {
                                     mapperKedua.put("sender","PAYUNGI");
                                     mapper.put("price", transferAmount);
                                     mapperKedua.put("pesan",PESAN_PAYUNGI+"\nTarget: " + phoneNumber +"\nAmmount: " + transferAmount);
+=======
+                                    DocumentReference outboxMessage = db.collection("Messages").document(user.getUid()).collection("Outbox").document(tanggal);
+                                    Map<String, Object> mapper = new HashMap<>();
+                                    mapper.put("price", transferAmount);
+>>>>>>> manpro/master
                                     if (!message.isEmpty()) {
                                         mapper.put("pesan", message);
                                     } else {
@@ -164,16 +176,27 @@ public class TransferActivity extends AppCompatActivity {
                                         minusVal.update(value);
                                     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> manpro/master
                                     inboxMessage.set(mapper).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(TransferActivity.this, "Berhasil dikirim", Toast.LENGTH_SHORT).show();
                                         }
                                     });
+<<<<<<< HEAD
                                     inboxPengirim.set(mapperKedua).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
                                             Toast.makeText(TransferActivity.this, "Transaksi diselesaikan", Toast.LENGTH_SHORT).show();
+=======
+                                    outboxMessage.set(mapper).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(TransferActivity.this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
+>>>>>>> manpro/master
                                         }
                                     });
                                 }
