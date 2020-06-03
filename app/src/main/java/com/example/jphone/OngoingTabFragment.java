@@ -83,6 +83,7 @@ public class OngoingTabFragment extends Fragment {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.history_list, parent, false);
             }
+            TextView staticBorrowDate = convertView.findViewById(R.id.staticBorrowDate);
             TextView tvBorrowDate = convertView.findViewById(R.id.tvBorrowDate);
             TextView tvReturnDate = convertView.findViewById(R.id.tvReturnDate);
             TextView tvPrice = convertView.findViewById(R.id.tvPrice);
@@ -97,6 +98,7 @@ public class OngoingTabFragment extends Fragment {
                 staticPrice.setVisibility(View.GONE);
             }
             else{
+                staticBorrowDate.setVisibility(View.GONE);
                 tvBorrowDate.setVisibility(View.GONE);
                 tvReturnDate.setVisibility(View.GONE);
                 tvPrice.setVisibility(View.GONE);

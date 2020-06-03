@@ -52,13 +52,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     FirebaseUser user;
 
     ImageView btnTransfer, btnReward, btnTopUp;
-    TextView balance;
+    TextView balance,username;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View homePage = inflater.inflate(R.layout.frag_home, container, false);
 
+        username = homePage.findViewById(R.id.tvName);
         balance = homePage.findViewById(R.id.balanceView);
         btnTransfer = homePage.findViewById(R.id.btnTransfer);
         btnReward = homePage.findViewById(R.id.btnReward);
@@ -68,6 +69,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         db = FirebaseFirestore.getInstance();
         user = mAuth.getInstance().getCurrentUser();
 
+        username.setText(user.getDisplayName());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         countBalance();
         fetchLastLocation();

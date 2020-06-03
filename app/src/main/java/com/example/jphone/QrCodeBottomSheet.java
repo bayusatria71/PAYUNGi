@@ -49,6 +49,7 @@ public class QrCodeBottomSheet extends BottomSheetDialogFragment {
         tvPhoneNumber = qrCodeSheet.findViewById(R.id.tvPhoneNumber);
 
         String qrId = user.getUid();
+        tvUId.setText("QR-CODE");
         getPhoneNumber(qrId);
         QRGEncoder qrgEncoder = new QRGEncoder(qrId, null, QRGContents.Type.TEXT, 500);
         try {

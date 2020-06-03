@@ -58,10 +58,6 @@ public class InboxFragment extends Fragment {
         return inboxPage;
     }
 
-    private void fetchList(){
-
-    }
-
     private void fillLists()
     {
         db.collection("Messages").document(user.getUid()).collection("Inbox").
@@ -87,29 +83,6 @@ public class InboxFragment extends Fragment {
                 }
             }
         });
-//        try {
-//            dateList.add(dateFormat.parse("11-11-2020"));
-//            dateList.add(dateFormat.parse("12-11-2020"));
-//            dateList.add(dateFormat.parse("13-11-2020"));
-//            dateList.add(dateFormat.parse("13-11-2020"));
-//            dateList.add(dateFormat.parse("13-11-2020"));
-//            dateList.add(dateFormat.parse("13-11-2020"));
-//            dateList.add(dateFormat.parse("13-11-2020"));
-//            dateList.add(dateFormat.parse("14-11-2020"));
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//
-//        messageList.add("Halo");
-//        messageList.add("Hello");
-//        messageList.add("こんにちは");
-//        messageList.add("여보세요");
-//        messageList.add("你好");
-//        messageList.add("Привет");
-//        messageList.add("สวัสดี");
-//        messageList.add("Ciao");
-//
-//
     }
 
     private class InboxAdapter extends ArrayAdapter<String>
@@ -153,89 +126,4 @@ public class InboxFragment extends Fragment {
             return convertView;
         }
     }
-
-//    private class InboxAdapter extends BaseExpandableListAdapter
-//    {
-//        private Context context;
-//        private ArrayList<Date> groupList;
-//        private HashMap<Date, ArrayList<String>> childList;
-//
-//        public InboxAdapter(Context context, ArrayList<Date> groupList, HashMap<Date, ArrayList<String>> childList)
-//        {
-//            this.context = context;
-//            this.groupList = groupList;
-//            this.childList = childList;
-//        }
-//
-//        @Override
-//        public int getGroupCount() {
-//            return this.groupList.size();
-//        }
-//
-//        @Override
-//        public int getChildrenCount(int groupPosition) {
-//            return this.childList.get(groupList.get(groupPosition)).size();
-//        }
-//
-//        @Override
-//        public Date getGroup(int groupPosition) {
-//            return this.groupList.get(groupPosition);
-//        }
-//
-//        @Override
-//        public String getChild(int groupPosition, int childPosition) {
-//            return this.childList.get(groupList.get(groupPosition)).get(childPosition);
-//        }
-//
-//        @Override
-//        public long getGroupId(int groupPosition) {
-//            return groupPosition;
-//        }
-//
-//        @Override
-//        public long getChildId(int groupPosition, int childPosition) {
-//            return childPosition;
-//        }
-//
-//        @Override
-//        public boolean hasStableIds() {
-//            return false;
-//        }
-//
-//        @Override
-//        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-//            Date groupTitle = (Date) getGroup(groupPosition);
-//            if (convertView == null)
-//            {
-//                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                convertView = inflater.inflate(R.layout.inbox_grouplist, null);
-//            }
-//
-//            TextView dateTitle = (TextView) convertView.findViewById(R.id.tvGroupTitle);
-//            dateTitle.setText(format.format(groupTitle));
-//
-//            return convertView;
-//        }
-//
-//        @Override
-//        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-//            String childMessage = (String) getChild(groupPosition, childPosition);
-//            if (convertView == null)
-//            {
-//                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                convertView = inflater.inflate(R.layout.inbox_childlist, null);
-//            }
-//
-//            TextView childText = (TextView) convertView.findViewById(R.id.tvChildText);
-//            childText.setText(childMessage);
-//
-//            return convertView;
-//        }
-//
-//        @Override
-//        public boolean isChildSelectable(int groupPosition, int childPosition) {
-//            return false;
-//        }
-//    }
-
 }

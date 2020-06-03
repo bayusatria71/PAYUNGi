@@ -180,9 +180,6 @@ public class TransferActivity extends AppCompatActivity {
                                         }
                                     });
                                 }
-                                else{
-//                                    Toast.makeText(TransferActivity.this, "", Toast.LENGTH_SHORT).show();
-                                }
                             }
                         }
                     }

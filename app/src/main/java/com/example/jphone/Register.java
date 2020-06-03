@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,7 +32,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText registerEmail, registerPassword, registerPhone,registerDate;
+    EditText registerEmail, registerPassword, registerPhone,registerDate, registerName;
 
     TextView loginText;
     Button registerButton;
@@ -39,13 +41,14 @@ public class Register extends AppCompatActivity {
     String date,phone;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
-    final static int balance =0;
+    final static int balance = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        registerName = findViewById(R.id.registerName);
         registerEmail = findViewById(R.id.registerEmail);
         registerPassword = findViewById(R.id.registerPassword);
         registerPhone = findViewById(R.id.registerPhone);
@@ -64,62 +67,65 @@ public class Register extends AppCompatActivity {
             finish();
         }
         registerButton.setOnClickListener(new View.OnClickListener() {
-        @Override
+            @Override
             public void onClick(View v) {
-            final String email = registerEmail.getText().toString().trim();
-            final String password = registerPassword.getText().toString().trim();
-            phone = registerPhone.getText().toString().trim();
-            date = registerDate.getText().toString().trim();
+                final String email = registerEmail.getText().toString().trim();
+                final String password = registerPassword.getText().toString().trim();
+                phone = registerPhone.getText().toString().trim();
+                date = registerDate.getText().toString().trim();
 
-            if(TextUtils.isEmpty(email))
-            {
-                registerEmail.setError("Email is required!");
-                return;
-            }
-
-            if(TextUtils.isEmpty(password))
-            {
-                registerPassword.setError("Password is required!");
-                return;
-            }
-
-            if(password.length() < 8)
-            {
-                registerPassword.setError("Password needs to be more than 8 character");
-                return;
-            }
-
-            loadRegister.setVisibility(View.VISIBLE);
-
-            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        DocumentReference documentReference = db.collection("Users").document(mAuth.getCurrentUser().getUid());
-                        Map<String,Object> user = new HashMap<>();
-                        user.put("Email",email);
-                        user.put("Phone",phone);
-                        user.put("Birth Date",date);
-                        user.put("Balance", balance);
-                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Log.d(TAG, "User Created: "+ mAuth.getCurrentUser().getUid());
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                finish();
-                            }
-                        });
-
-                    }
-                    else {
-                        loadRegister.setVisibility(View.INVISIBLE);
-                        Toast.makeText(Register.this,"Failed to create",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(),Register.class));
-                        finish();
-                    }
+                if(TextUtils.isEmpty(email))
+                {
+                    registerEmail.setError("Email is required!");
+                    return;
                 }
-            });
-          }
+
+                if(TextUtils.isEmpty(password))
+                {
+                    registerPassword.setError("Password is required!");
+                    return;
+                }
+
+                if(password.length() < 8)
+                {
+                    registerPassword.setError("Password needs to be more than 8 character");
+                    return;
+                }
+
+                loadRegister.setVisibility(View.VISIBLE);
+
+                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            DocumentReference documentReference = db.collection("Users").document(mAuth.getCurrentUser().getUid());
+                            Map<String,Object> user = new HashMap<>();
+                            user.put("Email",email);
+                            user.put("Phone",phone);
+                            user.put("Birth Date",date);
+                            user.put("Balance", balance);
+                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "User Created: "+ mAuth.getCurrentUser().getUid());
+                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    finish();
+                                }
+                            });
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(registerName.getText().toString().trim()).build();
+                            currentUser.updateProfile(profileUpdates);
+
+                        }
+                        else {
+                            loadRegister.setVisibility(View.INVISIBLE);
+                            Toast.makeText(Register.this,"Failed to create",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),Register.class));
+                            finish();
+                        }
+                    }
+                });
+            }
         });
 
         loginText.setOnClickListener(new View.OnClickListener(){
