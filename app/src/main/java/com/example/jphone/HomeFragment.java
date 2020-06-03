@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     FirebaseUser user;
 
     ImageView btnTransfer, btnReward, btnTopUp;
-    TextView balance;
+    TextView balance, tvName;
 
     @Nullable
     @Override
@@ -63,13 +63,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         btnTransfer = homePage.findViewById(R.id.btnTransfer);
         btnReward = homePage.findViewById(R.id.btnReward);
         btnTopUp = homePage.findViewById(R.id.btnTopUp);
+        tvName = homePage.findViewById(R.id.tvName);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         user = mAuth.getInstance().getCurrentUser();
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+        tvName.setText(user.getDisplayName());
         countBalance();
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         fetchLastLocation();
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -150,6 +153,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        countBalance();
     }
 
 }

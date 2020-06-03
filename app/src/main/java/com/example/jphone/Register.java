@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -30,7 +32,7 @@ import java.util.Map;
 
 public class Register extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText registerEmail, registerPassword, registerPhone,registerDate;
+    EditText registerEmail, registerPassword, registerPhone,registerDate, registerName;
 
     TextView loginText;
     Button registerButton;
@@ -39,13 +41,14 @@ public class Register extends AppCompatActivity {
     String date,phone;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
-    final static int balance =0;
+    final static int balance = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        registerName = findViewById(R.id.registerName);
         registerEmail = findViewById(R.id.registerEmail);
         registerPassword = findViewById(R.id.registerPassword);
         registerPhone = findViewById(R.id.registerPhone);
@@ -109,6 +112,9 @@ public class Register extends AppCompatActivity {
                                 finish();
                             }
                         });
+                        FirebaseUser currentUser = mAuth.getCurrentUser();
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(registerName.getText().toString().trim()).build();
+                        currentUser.updateProfile(profileUpdates);
 
                     }
                     else {

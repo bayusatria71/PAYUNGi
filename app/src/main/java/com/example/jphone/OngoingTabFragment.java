@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,9 +59,12 @@ public class OngoingTabFragment extends Fragment {
         ongoingReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                borrowDate.add(documentSnapshot.getDate("Tanggal Peminjamans"));
-                OngoingAdapter adapter = new OngoingAdapter(getContext(), borrowDate);
-                lvOngoing.setAdapter(adapter);
+                if (documentSnapshot.getDate("Tanggal Peminjamans") != null)
+                {
+                    borrowDate.add(documentSnapshot.getDate("Tanggal Peminjamans"));
+                    OngoingAdapter adapter = new OngoingAdapter(getContext(), borrowDate);
+                    lvOngoing.setAdapter(adapter);
+                }
             }
         });
     }

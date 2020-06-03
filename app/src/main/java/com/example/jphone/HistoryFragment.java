@@ -94,35 +94,8 @@ public class HistoryFragment extends Fragment {
         );
         tabLayoutMediator.attach();
 
-//        loadHistory();
-
-//        Toast.makeText(getContext(), user.getUid(), Toast.LENGTH_SHORT).show();
-//        setUpRecyclerView(activityPage);
-
         return historyFragment;
     }
-
-//    public void loadHistory()
-//    {
-//        FirebaseUser user = fAuth.getInstance().getCurrentUser();
-//        db = FirebaseFirestore.getInstance();
-//        historyReference = db.collection("Return").document(user.getUid()).collection("pengembalian");
-//        historyReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//
-//                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots)
-//                {
-//                    Note note = documentSnapshot.toObject(Note.class);
-//
-//                    borrowDate.add(note.getTanggalPeminjaman());
-//                    returnDate.add(note.getTanggalDikembalikan());
-//                    price.add(note.getPrice());
-//                }
-//
-//            }
-//        });
-//    }
 
     private static class TabAdapter extends FragmentStateAdapter
     {

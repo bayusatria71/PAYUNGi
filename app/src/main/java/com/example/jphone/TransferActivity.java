@@ -6,19 +6,40 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TransferActivity extends AppCompatActivity {
 
     EditText etPhoneNumber, etTransferAmount, etMessage;
     Button btnTransfer;
+
     Integer transferAmount;
     String phoneNumber, message;
+    long balanceKembali = 0l;
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore db;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +50,10 @@ public class TransferActivity extends AppCompatActivity {
         etMessage = findViewById(R.id.etMessage);
         etTransferAmount = findViewById(R.id.etTransferAmount);
         btnTransfer = findViewById(R.id.btnTransfer);
+
+        fAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        user = fAuth.getCurrentUser();
 
         etPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,6 +112,75 @@ public class TransferActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        btnTransfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("Users").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (queryDocumentSnapshots != null) {
+                            List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot documentChecker : list){
+                                if(documentChecker.getId().equals(user.getUid())){
+                                    balanceKembali = (long) documentChecker.get("Balance");
+                                }
+                            }
+                            for (DocumentSnapshot documentSnapshot : list) {
+                                if (documentSnapshot.get("Phone").equals(phoneNumber)) {
+                                    Date date = Calendar.getInstance().getTime();
+                                    SimpleDateFormat formatter = new SimpleDateFormat("EEE MM dd hh:mm:ss yyyy");
+                                    String tanggal = formatter.format(date);
+                                    DocumentReference inboxMessage = db.collection("Messages").document(documentSnapshot.getId()).collection("Inbox").document(tanggal);
+                                    DocumentReference setVal = db.collection("Users").document(documentSnapshot.getId());
+                                    DocumentReference minusVal = db.collection("Users").document(user.getUid());
+                                    DocumentReference outboxMessage = db.collection("Messages").document(user.getUid()).collection("Outbox").document(tanggal);
+                                    Map<String, Object> mapper = new HashMap<>();
+                                    mapper.put("price", transferAmount);
+                                    if (!message.isEmpty()) {
+                                        mapper.put("pesan", message);
+                                    } else {
+                                        mapper.put("pesan", "No message to be shown");
+                                    }
+
+                                    Map<String, Object> value = new HashMap<>();
+                                    long balanceSementara = (long) documentSnapshot.get("Balance");
+                                    if(balanceKembali < transferAmount){
+                                        Toast.makeText(TransferActivity.this, "Uang terlalu dikit", Toast.LENGTH_SHORT).show();
+                                        break;
+                                    }
+                                    else {
+                                        balanceSementara = balanceSementara + Long.valueOf(transferAmount);
+                                        balanceKembali = balanceKembali - Long.valueOf(transferAmount);
+                                        value.put("Balance", balanceSementara);
+                                        setVal.update(value);
+                                        value.put("Balance",balanceKembali);
+                                        minusVal.update(value);
+                                    }
+
+
+                                    inboxMessage.set(mapper).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(TransferActivity.this, "Berhasil dikirim", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    outboxMessage.set(mapper).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(TransferActivity.this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                                else{
+//                                    Toast.makeText(TransferActivity.this, "", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                });
             }
         });
 
