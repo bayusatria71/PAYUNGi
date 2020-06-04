@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,6 +31,7 @@ import java.util.Map;
 
 public class TransferActivity extends AppCompatActivity {
 
+    AppBarLayout titleBar;
     EditText etPhoneNumber, etTransferAmount, etMessage;
     Button btnTransfer;
 
@@ -50,6 +52,9 @@ public class TransferActivity extends AppCompatActivity {
         etMessage = findViewById(R.id.etMessage);
         etTransferAmount = findViewById(R.id.etTransferAmount);
         btnTransfer = findViewById(R.id.btnTransfer);
+        titleBar = findViewById(R.id.appBar);
+
+        titleBar.setOutlineProvider(null);
 
         fAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();

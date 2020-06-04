@@ -84,6 +84,13 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        btnTopUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), TopUpActivity.class));
+            }
+        });
+
 
         return homePage;
     }

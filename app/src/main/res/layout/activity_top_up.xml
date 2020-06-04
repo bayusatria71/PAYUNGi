@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".TopUpActivity">
+
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPallete1"
         android:elevation="0dp">
 
         <TextView
-            android:id="@+id/tvHeader"
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            android:text="My Activity"
+            android:text="Top Up"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/colorPallete2"
-            android:textSize="24sp" />
+            android:textSize="30sp"
+            android:layout_margin="30dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabMenu"
+        android:id="@+id/topupMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/appBar"
@@ -37,10 +38,11 @@
         android:elevation="0dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/tabContainer"
+        android:id="@+id/topupContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabMenu"/>
+        android:layout_below="@id/topupMenu"/>
+
 
 
 </RelativeLayout>
