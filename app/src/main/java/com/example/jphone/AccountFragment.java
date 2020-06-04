@@ -13,13 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AccountFragment extends Fragment {
 
     FirebaseAuth mAuth;
     FirebaseUser user;
+    FirebaseFirestore db;
+    String phoneNumber;
 
     Button btnLogOut;
     EditText etEmail, etPhoneNumber, etPassword;
@@ -40,7 +45,13 @@ public class AccountFragment extends Fragment {
 
         tvName.setText(user.getDisplayName());
         etEmail.setText(user.getEmail());
-        etPhoneNumber.setText(user.getPhoneNumber());
+        db.collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                phoneNumber = documentSnapshot.getString("Phone");
+                etPhoneNumber.setText(phoneNumber);
+            }
+        });
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override

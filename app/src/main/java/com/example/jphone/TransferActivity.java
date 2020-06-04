@@ -38,6 +38,8 @@ public class TransferActivity extends AppCompatActivity {
     Integer transferAmount;
     String phoneNumber, message;
     long balanceKembali = 0l;
+    String phoneNumberUser;
+    final static String PESAN_PAYUNGI = "Transaksi Berhasil diselesaikan";
 
     FirebaseAuth fAuth;
     FirebaseFirestore db;
@@ -131,6 +133,8 @@ public class TransferActivity extends AppCompatActivity {
                             for (DocumentSnapshot documentChecker : list){
                                 if(documentChecker.getId().equals(user.getUid())){
                                     balanceKembali = (long) documentChecker.get("Balance");
+                                    phoneNumberUser = (String) documentChecker.get("Phone");
+
                                 }
                             }
                             for (DocumentSnapshot documentSnapshot : list) {
@@ -141,9 +145,14 @@ public class TransferActivity extends AppCompatActivity {
                                     DocumentReference inboxMessage = db.collection("Messages").document(documentSnapshot.getId()).collection("Inbox").document(tanggal);
                                     DocumentReference setVal = db.collection("Users").document(documentSnapshot.getId());
                                     DocumentReference minusVal = db.collection("Users").document(user.getUid());
-                                    DocumentReference outboxMessage = db.collection("Messages").document(user.getUid()).collection("Outbox").document(tanggal);
+                                    DocumentReference inboxPengirim = db.collection("Messages").document(user.getUid()).collection("Inbox").document(tanggal);
                                     Map<String, Object> mapper = new HashMap<>();
+                                    Map<String, Object> mapperKedua = new HashMap<>();
+                                    mapper.put("sender",phoneNumberUser);
+                                    mapperKedua.put("price",transferAmount);
+                                    mapperKedua.put("sender","PAYUNGI");
                                     mapper.put("price", transferAmount);
+                                    mapperKedua.put("pesan",PESAN_PAYUNGI+"\nTarget: " + phoneNumber +"\nAmmount: " + transferAmount);
                                     if (!message.isEmpty()) {
                                         mapper.put("pesan", message);
                                     } else {
@@ -172,15 +181,13 @@ public class TransferActivity extends AppCompatActivity {
                                             Toast.makeText(TransferActivity.this, "Berhasil dikirim", Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                                    outboxMessage.set(mapper).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                                    inboxPengirim.set(mapperKedua).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Toast.makeText(TransferActivity.this, "Berhasil disimpan", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(TransferActivity.this, "Transaksi diselesaikan", Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                                }
-                                else{
-//                                    Toast.makeText(TransferActivity.this, "", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
