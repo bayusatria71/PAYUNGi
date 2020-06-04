@@ -27,6 +27,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PhoneCreditTabFragment extends Fragment {
 
@@ -34,7 +39,8 @@ public class PhoneCreditTabFragment extends Fragment {
     private EditText etTopUpAmount;
     private TextView tvphoneNumber, tvBalance;
 
-    private Integer topUp = 0;
+    private long topUp = 0L;
+    private long balance = 0L;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -62,6 +68,12 @@ public class PhoneCreditTabFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         userReference = db.collection("Users").document(user.getUid());
+
+        Date date = Calendar.getInstance().getTime();
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE MM dd hh:mm:ss yyyy");
+        String tanggal = formatter.format(date);
+        final DocumentReference inboxTopUp = db.collection("Messages").document(user.getUid()).collection("Inbox").document(tanggal);
+
         userReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -69,6 +81,7 @@ public class PhoneCreditTabFragment extends Fragment {
                 {
                     tvphoneNumber.setText(documentSnapshot.getString("Phone"));
                     tvBalance.setText(rupiah.format(documentSnapshot.getLong("Balance")));
+                    balance = documentSnapshot.getLong("Balance");
                 }
             }
         });
@@ -126,7 +139,22 @@ public class PhoneCreditTabFragment extends Fragment {
         btnTopUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), String.valueOf(topUp), Toast.LENGTH_SHORT).show();
+                userReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        balance = documentSnapshot.getLong("Balance");
+                    }
+                });
+                Map<String, Object> tempTopUp = new HashMap<>();
+                Map<String, Object> mapper = new HashMap<>();
+                mapper.put("sender","PAYUNGI");
+                mapper.put("price",topUp);
+                mapper.put("pesan","Berhasil melakukan Top Up sebesar : " + topUp);
+                balance = balance + topUp;
+                tempTopUp.put("Balance",balance);
+                userReference.update(tempTopUp);
+                tvBalance.setText(rupiah.format(balance));
+                inboxTopUp.set(mapper);
             }
         });
 

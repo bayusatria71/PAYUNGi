@@ -90,16 +90,18 @@
         android:textColor="@color/colorPallete2"
         android:layout_alignStart="@id/ivProfilePicture"
         android:layout_marginTop="20dp"
-        android:paddingStart="3dp"/>
+        android:paddingStart="3dp"
+        android:visibility="invisible"/>
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textPassword"
         android:layout_below="@id/staticPassword"
         android:layout_alignStart="@id/staticPassword"
         android:layout_marginEnd="28dp"
-        android:text="08136942069"/>
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/btnLogout"

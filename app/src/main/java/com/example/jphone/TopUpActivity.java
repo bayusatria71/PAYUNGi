@@ -43,7 +43,7 @@ public class TopUpActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    tab.setText("Other Methods");
+                    tab.setText("Bank");
                 }
             }
         });
@@ -63,7 +63,7 @@ public class TopUpActivity extends AppCompatActivity {
             if (position == 0) {
                 return new PhoneCreditTabFragment();
             }
-            return new OtherMethodsTabFragment();
+            return new BankTabFragment();
         }
 
         @Override

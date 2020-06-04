@@ -152,7 +152,7 @@ public class TransferActivity extends AppCompatActivity {
                                     mapperKedua.put("price",transferAmount);
                                     mapperKedua.put("sender","PAYUNGI");
                                     mapper.put("price", transferAmount);
-                                    mapperKedua.put("pesan",PESAN_PAYUNGI+"\nTarget: " + phoneNumber +"\nAmmount: " + transferAmount);
+                                    mapperKedua.put("pesan",PESAN_PAYUNGI+"\nTarget: " + phoneNumber);
                                     if (!message.isEmpty()) {
                                         mapper.put("pesan", message);
                                     } else {

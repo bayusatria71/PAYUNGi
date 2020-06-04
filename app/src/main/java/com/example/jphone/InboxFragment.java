@@ -58,10 +58,6 @@ public class InboxFragment extends Fragment {
         return inboxPage;
     }
 
-    private void fetchList(){
-
-    }
-
     private void fillLists()
     {
         db.collection("Messages").document(user.getUid()).collection("Inbox").
@@ -73,14 +69,12 @@ public class InboxFragment extends Fragment {
                     for(DocumentSnapshot documentSnapshot : list){
                         try {
                             dateList.add(fireDateFormat.parse(documentSnapshot.getId()));
-                            Toast.makeText(getContext(), documentSnapshot.getId(), Toast.LENGTH_SHORT).show();
-
                         }
                         catch (Exception e){
                             e.printStackTrace();
                         }
-                        messageList.add(documentSnapshot.getString("pesan"));
-                        senderList.add(documentSnapshot.getString("pengirim"));
+                        messageList.add("Ammount : " + documentSnapshot.getLong("price") + "\n" + documentSnapshot.getString("pesan"));
+                        senderList.add(documentSnapshot.getString("sender"));
                     }
                     InboxAdapter adapter = new InboxAdapter(getContext(), messageList, dateList, senderList);
                     lvInbox.setAdapter(adapter);

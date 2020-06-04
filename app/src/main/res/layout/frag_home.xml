@@ -26,7 +26,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
             android:layout_marginHorizontal="40dp"
-            android:columnCount="3"
+            android:columnCount="2"
             android:rowCount="2"
             android:orientation="horizontal">
 
@@ -45,15 +45,6 @@
                 android:layout_height="40dp"
                 android:src="@drawable/ic_send"
                 android:layout_column="1"
-                android:layout_row="0"
-                android:layout_gravity="fill"/>
-
-            <ImageView
-                android:id="@+id/btnReward"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_reward"
-                android:layout_column="2"
                 android:layout_row="0"
                 android:layout_gravity="fill"/>
 
@@ -81,17 +72,6 @@
                 android:layout_row="1"
                 android:layout_columnWeight="1"/>
 
-            <TextView
-                android:id="@+id/tvReward"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reward"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:layout_gravity="center_horizontal"
-                android:layout_column="2"
-                android:layout_row="1"
-                android:layout_columnWeight="1"/>
 
         </GridLayout>
 

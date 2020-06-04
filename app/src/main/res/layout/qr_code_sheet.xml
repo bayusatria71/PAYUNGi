@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignStart="@id/qrCode"
         android:layout_alignEnd="@id/qrCode"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:gravity="center_horizontal"/>
 
     <TextView

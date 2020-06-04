@@ -40,10 +40,17 @@ public class AccountFragment extends Fragment {
         etPassword = accountPage.findViewById(R.id.etPassword);
         tvName = accountPage.findViewById(R.id.tvName);
 
+        db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getInstance().getCurrentUser();
 
-        tvName.setText(user.getDisplayName());
+        if(user.getDisplayName()!= null){
+            tvName.setText(user.getDisplayName());
+        }
+        else{
+            tvName.setText("Error");
+        }
+
         etEmail.setText(user.getEmail());
         db.collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

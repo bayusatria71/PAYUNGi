@@ -54,22 +54,14 @@ public class QrCodeBottomSheet extends BottomSheetDialogFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        tvUId.setText(user.getUid());
-//        tvPhoneNumber.setText(getPhoneNumber(user.getUid()));
-
-        return qrCodeSheet;
-    }
-
-    public String getPhoneNumber(String Uid)
-    {
-        final String[] phoneNumber = {""};
-        userData = db.collection("Borrow").document(Uid);
-        userData.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        tvUId.setText("QR-CODE");
+        db.collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                phoneNumber[0] = documentSnapshot.getString("Phone");
+                tvPhoneNumber.setText(documentSnapshot.getString("Phone"));
             }
         });
-        return phoneNumber[0];
+
+        return qrCodeSheet;
     }
 }
