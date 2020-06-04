@@ -6,15 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".TransferActivity">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Transfer"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="@color/colorPallete2"
-        android:textSize="30sp"
-        android:layout_margin="30dp"/>
+        android:background="@color/colorPallete1"
+        android:elevation="0dp">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transfer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/colorPallete2"
+            android:textSize="30sp"
+            android:layout_marginStart="30dp"
+            android:layout_marginVertical="20dp"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <TextView
         android:id="@+id/tvReceiver"
@@ -23,8 +34,9 @@
         android:text="Send to"
         android:textColor="#000000"
         android:textSize="20sp"
-        android:layout_below="@id/tvTitle"
-        android:layout_alignStart="@id/tvTitle"/>
+        android:layout_below="@id/appBar"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"/>
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etPhoneNumber"
@@ -40,10 +52,9 @@
     <RelativeLayout
         android:id="@+id/layoutTransfer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/transfer_layout"
         android:layout_below="@id/etPhoneNumber"
-        android:layout_above="@id/tvMessage"
         android:layout_marginHorizontal="30dp">
 
         <TextView
@@ -73,8 +84,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvAmount"
             android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
             android:layout_toEndOf="@id/tvIDR"
-            android:hint="20.000"
+            android:hint="20,000"
             android:inputType="number"
             android:textColor="@color/colorPallete2"
             android:textSize="40sp"/>

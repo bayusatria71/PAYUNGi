@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/inputEmail"
         android:layout_width="373dp"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textPersonName"
@@ -23,7 +23,7 @@
     <EditText
         android:id="@+id/inputPassword"
         android:layout_width="372dp"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Password"
@@ -34,7 +34,7 @@
 
     <ImageView
         android:id="@+id/gambarLogo"
-        android:layout_width="408dp"
+        android:layout_width="match_parent"
         android:layout_height="279dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

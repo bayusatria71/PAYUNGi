@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -30,29 +31,36 @@ import java.util.Map;
 
 public class TransferActivity extends AppCompatActivity {
 
+    AppBarLayout titleBar;
     EditText etPhoneNumber, etTransferAmount, etMessage;
     Button btnTransfer;
-    int transferAmount;
+
+    Integer transferAmount;
     String phoneNumber, message;
-    FirebaseAuth fAuth;
-    FirebaseFirestore db;
-    FirebaseUser user;
     long balanceKembali = 0l;
     String phoneNumberUser;
     final static String PESAN_PAYUNGI = "Transaksi Berhasil diselesaikan";
+
+    FirebaseAuth fAuth;
+    FirebaseFirestore db;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer);
 
-        fAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        user = fAuth.getCurrentUser();
         etPhoneNumber = findViewById(R.id.etPhoneNumber);
         etMessage = findViewById(R.id.etMessage);
         etTransferAmount = findViewById(R.id.etTransferAmount);
         btnTransfer = findViewById(R.id.btnTransfer);
+        titleBar = findViewById(R.id.appBar);
+
+        titleBar.setOutlineProvider(null);
+
+        fAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        user = fAuth.getCurrentUser();
 
         etPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -113,6 +121,7 @@ public class TransferActivity extends AppCompatActivity {
 
             }
         });
+
         btnTransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,7 +152,7 @@ public class TransferActivity extends AppCompatActivity {
                                     mapperKedua.put("price",transferAmount);
                                     mapperKedua.put("sender","PAYUNGI");
                                     mapper.put("price", transferAmount);
-                                    mapperKedua.put("pesan",PESAN_PAYUNGI+"\nTarget: " + phoneNumber +"\nAmmount: " + transferAmount);
+                                    mapperKedua.put("pesan",PESAN_PAYUNGI+"\nTarget: " + phoneNumber);
                                     if (!message.isEmpty()) {
                                         mapper.put("pesan", message);
                                     } else {
@@ -186,6 +195,7 @@ public class TransferActivity extends AppCompatActivity {
                 });
             }
         });
+
     }
 
 }

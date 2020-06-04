@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TransferActivity">
+
+
+    <TextView
+        android:id="@+id/tvReceiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Up to"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/logoPayungi"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/payungi_logo"
+        android:layout_alignTop="@id/tvPhoneNumber"
+        android:layout_alignBottom="@id/tvBalance"
+        android:layout_marginStart="30dp"/>
+
+    <TextView
+        android:id="@+id/tvPhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/logoPayungi"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/tvReceiver"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Balace"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:layout_below="@+id/tvPhoneNumber"
+        android:layout_toEndOf="@id/logoPayungi"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tvNominal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Amount"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        android:layout_marginVertical="16dp"
+        android:layout_below="@id/tvBalance"/>
+
+    <Button
+        android:id="@+id/btn20000"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:layout_below="@id/tvNominal"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:paddingHorizontal="16dp"
+        android:text="Rp20,000"
+        android:textColor="#000000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btn50000"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:layout_below="@id/tvNominal"
+        android:layout_toEndOf="@id/btn20000"
+        android:layout_marginHorizontal="10dp"
+        android:paddingHorizontal="16dp"
+        android:text="Rp50,000"
+        android:textColor="#000000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/btn100000"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:layout_below="@id/tvNominal"
+        android:paddingHorizontal="16dp"
+        android:layout_toEndOf="@id/btn50000"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="30dp"
+        android:text="Rp100,000"
+        android:textColor="#000000"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:gravity="center"/>
+
+    <RelativeLayout
+        android:id="@+id/layoutTopUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/transfer_layout"
+        android:layout_below="@id/btn20000"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tvAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or enter your top up amount here"
+            android:textColor="@color/colorPallete2"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/tvIDR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvAmount"
+            android:layout_alignStart="@id/tvAmount"
+            android:layout_marginTop="10dp"
+            android:text="Rp"
+            android:textColor="#000000"
+            android:textSize="40sp"/>
+
+        <com.aldoapps.autoformatedittext.AutoFormatEditText
+            android:id="@+id/etTopUpAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvAmount"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="24dp"
+            android:layout_toEndOf="@id/tvIDR"
+            android:inputType="number"
+            android:textColor="#000000"
+            android:textSize="40sp"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnTopUp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_shape"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="20dp"
+        android:layout_below="@id/layoutTopUp"
+        android:textColor="@color/colorPallete2"
+        android:text="Top Up"
+        android:textSize="18sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+
+</RelativeLayout>

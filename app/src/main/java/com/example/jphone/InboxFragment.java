@@ -36,7 +36,7 @@ public class InboxFragment extends Fragment {
     private ListView lvInbox;
     private ArrayList<Date> dateList = new ArrayList<>();
     private ArrayList<String> messageList = new ArrayList<>();
-    private HashMap<String, Integer> inboxMapping = new HashMap<>();
+    private ArrayList<String> senderList = new ArrayList<>();
     private SimpleDateFormat fireDateFormat = new SimpleDateFormat("EEE MM dd hh:mm:ss yyyy");
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy");
@@ -69,16 +69,14 @@ public class InboxFragment extends Fragment {
                     for(DocumentSnapshot documentSnapshot : list){
                         try {
                             dateList.add(fireDateFormat.parse(documentSnapshot.getId()));
-                            Toast.makeText(getContext(), documentSnapshot.getId(), Toast.LENGTH_SHORT).show();
-
                         }
                         catch (Exception e){
                             e.printStackTrace();
                         }
-                        messageList.add(documentSnapshot.getString("pesan"));
+                        messageList.add("Ammount : " + documentSnapshot.getLong("price") + "\n" + documentSnapshot.getString("pesan"));
+                        senderList.add(documentSnapshot.getString("sender"));
                     }
-                    inboxMapping.put(messageList.get(0), R.mipmap.payungi_logo);
-                    InboxAdapter adapter = new InboxAdapter(getContext(), messageList, dateList, inboxMapping);
+                    InboxAdapter adapter = new InboxAdapter(getContext(), messageList, dateList, senderList);
                     lvInbox.setAdapter(adapter);
                 }
             }
@@ -88,12 +86,12 @@ public class InboxFragment extends Fragment {
     private class InboxAdapter extends ArrayAdapter<String>
     {
         private ArrayList<Date> dates;
-        private HashMap<String, Integer> pictures;
+        private ArrayList<String> senders;
 
-        InboxAdapter(Context context, ArrayList<String> messageList, ArrayList<Date> dates, HashMap<String, Integer> pictures) {
+        InboxAdapter(Context context, ArrayList<String> messageList, ArrayList<Date> dates, ArrayList<String> senders) {
             super(context, 0, messageList);
             this.dates = dates;
-            this.pictures = pictures;
+            this.senders = senders;
         }
 
         @NonNull
@@ -108,22 +106,19 @@ public class InboxFragment extends Fragment {
 
             TextView tvMessage = convertView.findViewById(R.id.tvMessage);
             TextView tvDate = convertView.findViewById(R.id.tvDate);
-            ImageView imMessage = convertView.findViewById(R.id.imMessage);
+            TextView tvSender = convertView.findViewById(R.id.tvSender);
 
             tvMessage.setText(message);
+            tvSender.setText(senders.get(position));
             if(dates.isEmpty()){
                 tvDate.setText("Kosong");
             }
             else {
                 tvDate.setText(format.format(dates.get(position)));
             }
-            if (pictures.containsKey(message) && pictures.get(message) != null)
-            {
-                imMessage.setImageResource(pictures.get(message));
-                imMessage.setVisibility(View.VISIBLE);
-            }
 
             return convertView;
         }
     }
+
 }

@@ -19,7 +19,7 @@
     <item
         android:id="@+id/inbox_menu"
         android:icon="@drawable/ic_inbox"
-        android:title="Inbox"/>
+        android:title="Message"/>
 
     <item
         android:id="@+id/account_menu"

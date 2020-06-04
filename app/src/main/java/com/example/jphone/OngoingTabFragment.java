@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,9 +59,12 @@ public class OngoingTabFragment extends Fragment {
         ongoingReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (documentSnapshot.getDate("Tanggal Peminjamans") != null)
+                {
                     borrowDate.add(documentSnapshot.getDate("Tanggal Peminjamans"));
                     OngoingAdapter adapter = new OngoingAdapter(getContext(), borrowDate);
                     lvOngoing.setAdapter(adapter);
+                }
             }
         });
     }
@@ -79,32 +83,23 @@ public class OngoingTabFragment extends Fragment {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             Date borrow = getItem(position);
-            if (convertView == null) {
+            if (convertView == null)
+            {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.history_list, parent, false);
             }
-            TextView staticBorrowDate = convertView.findViewById(R.id.staticBorrowDate);
+
             TextView tvBorrowDate = convertView.findViewById(R.id.tvBorrowDate);
             TextView tvReturnDate = convertView.findViewById(R.id.tvReturnDate);
             TextView tvPrice = convertView.findViewById(R.id.tvPrice);
             TextView staticReturnDate = convertView.findViewById(R.id.staticReturnDate);
             TextView staticPrice = convertView.findViewById(R.id.staticPrice);
 
-            if(borrow != null) {
-                tvBorrowDate.setText(format.format(borrow));
-                tvReturnDate.setVisibility(View.GONE);
-                tvPrice.setVisibility(View.GONE);
-                staticReturnDate.setVisibility(View.GONE);
-                staticPrice.setVisibility(View.GONE);
-            }
-            else{
-                staticBorrowDate.setVisibility(View.GONE);
-                tvBorrowDate.setVisibility(View.GONE);
-                tvReturnDate.setVisibility(View.GONE);
-                tvPrice.setVisibility(View.GONE);
-                staticReturnDate.setVisibility(View.GONE);
-                staticPrice.setVisibility(View.GONE);
-            }
+            tvBorrowDate.setText(format.format(borrow));
+            tvReturnDate.setVisibility(View.GONE);
+            tvPrice.setVisibility(View.GONE);
+            staticReturnDate.setVisibility(View.GONE);
+            staticPrice.setVisibility(View.GONE);
 
             return convertView;
         }

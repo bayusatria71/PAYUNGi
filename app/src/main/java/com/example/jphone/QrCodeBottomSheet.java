@@ -32,8 +32,6 @@ public class QrCodeBottomSheet extends BottomSheetDialogFragment {
     private ImageView qrCode;
     private TextView tvUId, tvPhoneNumber;
 
-    private String phoneNumber;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,8 +47,6 @@ public class QrCodeBottomSheet extends BottomSheetDialogFragment {
         tvPhoneNumber = qrCodeSheet.findViewById(R.id.tvPhoneNumber);
 
         String qrId = user.getUid();
-        tvUId.setText("QR-CODE");
-        getPhoneNumber(qrId);
         QRGEncoder qrgEncoder = new QRGEncoder(qrId, null, QRGContents.Type.TEXT, 500);
         try {
             Bitmap qrBits = qrgEncoder.getBitmap();
@@ -58,19 +54,14 @@ public class QrCodeBottomSheet extends BottomSheetDialogFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return qrCodeSheet;
-    }
-
-    public void getPhoneNumber(String Uid)
-    {
-        userData = db.collection("Users").document(Uid);
-        userData.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        tvUId.setText("QR-CODE");
+        db.collection("Users").document(user.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                phoneNumber = documentSnapshot.getString("Phone");
-                tvPhoneNumber.setText(phoneNumber);
+                tvPhoneNumber.setText(documentSnapshot.getString("Phone"));
             }
         });
+
+        return qrCodeSheet;
     }
 }

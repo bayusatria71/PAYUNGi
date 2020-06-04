@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +31,6 @@ public class HistoryTabFragment extends Fragment {
     private FirebaseAuth fAuth;
     private FirebaseFirestore db;
     private CollectionReference historyReference;
-    FirebaseUser user;
 
     private ArrayList<Date> borrowDate = new ArrayList<>();
     private ArrayList<Date> returnDate = new ArrayList<>();
@@ -44,7 +42,6 @@ public class HistoryTabFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View historyTab = inflater.inflate(R.layout.historytab_fragment, container, false);
         lvHistory = historyTab.findViewById(R.id.lvActivities);
-        user = fAuth.getInstance().getCurrentUser();
         loadHistory();
 
         return historyTab;
@@ -52,25 +49,23 @@ public class HistoryTabFragment extends Fragment {
 
     public void loadHistory()
     {
+        FirebaseUser user = fAuth.getInstance().getCurrentUser();
         db = FirebaseFirestore.getInstance();
         historyReference = db.collection("Return").document(user.getUid()).collection("pengembalian");
         historyReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if(!queryDocumentSnapshots.isEmpty()) {
-                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                        Note note = documentSnapshot.toObject(Note.class);
 
-                        borrowDate.add(note.getTanggalPeminjaman());
-                        returnDate.add(note.getTanggalDikembalikan());
-                        price.add(note.getPrice());
-                    }
-                    HistoryAdapter adapter = new HistoryAdapter(getContext(), borrowDate, returnDate, price);
-                    lvHistory.setAdapter(adapter);
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots)
+                {
+                    Note note = documentSnapshot.toObject(Note.class);
+
+                    borrowDate.add(note.getTanggalPeminjaman());
+                    returnDate.add(note.getTanggalDikembalikan());
+                    price.add(note.getPrice());
                 }
-                else{
-                    System.out.println("Gagal");
-                }
+                HistoryAdapter adapter = new HistoryAdapter(getContext(), borrowDate, returnDate, price);
+                lvHistory.setAdapter(adapter);
             }
         });
     }

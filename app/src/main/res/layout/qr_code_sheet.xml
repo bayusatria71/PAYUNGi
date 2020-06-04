@@ -28,21 +28,12 @@
         android:layout_alignEnd="@id/qrCode"
         android:layout_below="@id/qrCode"
         android:gravity="center_horizontal"/>
-    <View
-        android:id="@+id/separator"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/tvUId"
-        android:background="@color/colorPallete2"
-        />
+
     <ImageView
         android:id="@+id/qrCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/separator"/>
+        android:layout_below="@id/tvUId"/>
 
 </RelativeLayout>

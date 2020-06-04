@@ -58,14 +58,10 @@ public class HistoryFragment extends Fragment {
     private ArrayList<Date> borrowDate = new ArrayList<>();
     private ArrayList<Date> returnDate = new ArrayList<>();
     private ArrayList<Integer> price = new ArrayList<>();
-    private ArrayList<Note> history = new ArrayList<>();
 
     private TabLayout tabMenu;
     private AppBarLayout titleBar;
     private ViewPager2 tabContainer;
-
-    CollectionReference ref;
-    NoteAdapter adapter;
 
     @Nullable
     @Override
@@ -97,31 +93,9 @@ public class HistoryFragment extends Fragment {
         }
         );
         tabLayoutMediator.attach();
-//        RecyclerView recyclerView = historyFragment.findViewById(R.id.recyc)
-
-//        loadHistory();
-
-//        Toast.makeText(getContext(), user.getUid(), Toast.LENGTH_SHORT).show();
-//        setUpRecyclerView(activityPage);
 
         return historyFragment;
     }
-
-//    public void loadHistory()
-//    {
-//        FirebaseUser user = fAuth.getInstance().getCurrentUser();
-//        db = FirebaseFirestore.getInstance();
-//        ref = db.collection("Return").document(user.getUid()).collection("pengembalian");
-//        Query query = ref;
-//        FirestoreRecyclerOptions<Note> option = new FirestoreRecyclerOptions.Builder<Note>()
-//                .setQuery(query,Note.class)
-//                .build();
-//        adapter = new NoteAdapter(option);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        recyclerView.setAdapter(adapter);
-//
-//    }
 
     private static class TabAdapter extends FragmentStateAdapter
     {
