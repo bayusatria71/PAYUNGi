@@ -14,7 +14,7 @@
         android:background="@drawable/border"
         android:padding="5dp"/>
 
-    <TextView
+    <EditText
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,14 +26,18 @@
         android:layout_marginStart="10dp"/>
 
     <TextView
-        android:id="@+id/tvChangePicture"
+        android:id="@+id/tvChangeProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:text="Edit Profile"
+        android:textColor="@color/colorPallete2"
+        android:textStyle="bold"
         android:layout_below="@id/tvName"
-        android:layout_alignStart="@id/tvName"
-        android:layout_marginTop="8dp"/>
+        android:layout_toEndOf="@id/ivProfilePicture"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignBottom="@id/ivProfilePicture"/>
 
     <TextView
         android:id="@+id/staticEmail"
@@ -54,8 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/staticEmail"
         android:layout_alignStart="@id/staticEmail"
-        android:layout_marginEnd="28dp"
-        android:text="Email@email.com"/>
+        android:layout_marginEnd="28dp"/>
 
     <TextView
         android:id="@+id/staticPhoneNumber"
@@ -76,30 +79,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/staticPhoneNumber"
         android:layout_alignStart="@id/staticPhoneNumber"
-        android:layout_marginEnd="28dp"
-        android:text="08136942069"/>
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="28dp"/>
 
-    <TextView
-        android:id="@+id/staticPassword"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:text="Cancel"
         android:layout_below="@id/etPhoneNumber"
-        android:text="Password"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPallete2"
-        android:layout_alignStart="@id/ivProfilePicture"
         android:layout_marginTop="20dp"
-        android:paddingStart="3dp"/>
+        android:layout_alignStart="@id/etPhoneNumber"/>
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/staticPassword"
-        android:layout_alignStart="@id/staticPassword"
-        android:layout_marginEnd="28dp"
-        android:text="08136942069"/>
+        android:background="@drawable/button_shape"
+        android:layout_below="@id/etPhoneNumber"
+        android:layout_alignEnd="@id/etPhoneNumber"
+        android:layout_marginTop="20dp"
+        android:text="Save"/>
 
     <Button
         android:id="@+id/btnLogout"
