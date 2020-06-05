@@ -67,55 +67,64 @@
         android:layout_marginVertical="16dp"
         android:layout_below="@id/tvBalance"/>
 
-    <Button
-        android:id="@+id/btn20000"
-        android:layout_width="110dp"
+    <GridLayout
+        android:id="@+id/nominalOptions"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_shape"
-        android:layout_below="@id/tvNominal"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="30dp"
-        android:paddingHorizontal="16dp"
-        android:text="Rp20,000"
-        android:textColor="#000000"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:gravity="center"/>
+        android:layout_below="@+id/tvNominal"
+        android:layout_marginHorizontal="30dp"
+        android:columnCount="3"
+        android:rowCount="1"
+        >
 
-    <Button
-        android:id="@+id/btn50000"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_shape"
-        android:layout_below="@id/tvNominal"
-        android:layout_toEndOf="@id/btn20000"
-        android:layout_marginHorizontal="10dp"
-        android:paddingHorizontal="16dp"
-        android:text="Rp50,000"
-        android:textColor="#000000"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:gravity="center"/>
+        <Button
+            android:id="@+id/btn20000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:paddingHorizontal="16dp"
+            android:layout_marginEnd="5dp"
+            android:text="Rp20,000"
+            android:textColor="#000000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:gravity="center"
+            android:layout_columnWeight="1"/>
 
-    <Button
-        android:id="@+id/btn100000"
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_shape"
-        android:layout_below="@id/tvNominal"
-        android:paddingHorizontal="16dp"
-        android:layout_toEndOf="@id/btn50000"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="30dp"
-        android:text="Rp100,000"
-        android:textColor="#000000"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:gravity="center"/>
+        <Button
+            android:id="@+id/btn30000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:paddingHorizontal="16dp"
+            android:layout_marginHorizontal="5dp"
+            android:text="Rp30,000"
+            android:textColor="#000000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:gravity="center"
+            android:layout_columnWeight="1"/>
+
+        <Button
+            android:id="@+id/btn50000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
+            android:paddingHorizontal="16dp"
+            android:layout_marginStart="5dp"
+            android:text="Rp50,000"
+            android:textColor="#000000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:gravity="center"
+            android:layout_columnWeight="1"/>
+
+    </GridLayout>
+
 
     <RelativeLayout
         android:id="@+id/layoutTopUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/transfer_layout"
-        android:layout_below="@id/btn20000"
+        android:layout_below="@id/nominalOptions"
         android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp">
 

@@ -55,8 +55,8 @@ public class PhoneCreditTabFragment extends Fragment {
         View phoneCredit = inflater.inflate(R.layout.topup_phone_credit, container, false);
 
         btnFirst = phoneCredit.findViewById(R.id.btn20000);
-        btnSecond = phoneCredit.findViewById(R.id.btn50000);
-        btnThird = phoneCredit.findViewById(R.id.btn100000);
+        btnSecond = phoneCredit.findViewById(R.id.btn30000);
+        btnThird = phoneCredit.findViewById(R.id.btn50000);
         btnTopUp = phoneCredit.findViewById(R.id.btnTopUp);
         etTopUpAmount = phoneCredit.findViewById(R.id.etTopUpAmount);
         tvphoneNumber = phoneCredit.findViewById(R.id.tvPhoneNumber);
@@ -97,7 +97,7 @@ public class PhoneCreditTabFragment extends Fragment {
         btnSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                topUp = 50000;
+                topUp = 30000;
                 etTopUpAmount.setText("50,000");
             }
         });
@@ -105,7 +105,7 @@ public class PhoneCreditTabFragment extends Fragment {
         btnThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                topUp = 100000;
+                topUp = 50000;
                 etTopUpAmount.setText("100,000");
             }
         });
