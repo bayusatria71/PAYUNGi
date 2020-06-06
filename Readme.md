@@ -13,13 +13,12 @@ A repo for PAYUNGI project
   * [Build Debug-app](#build-debug-app)
   * [Build Signed-app](#build-signed-app)
 
-//sementara ![contoh2](https://drive.google.com/uc?export=view&id=asda)
 ## What is PAYUNGI
 PAYUNGI is an Umbrella renting application for smartphone that uses Android as its OS. Payungi has two application, for the users and for the stations. In the User application, users can 
 
 ## Screenshots
 
-Berikut beberapa gambar menunjukan User application dan Station Application
+These are a few picture of PAYUNGI user app and station app.
 
 ![User Application](https://drive.google.com/uc?export=view&id=11J7XXvehyI0CoYey8mDFNhtdXyVqUdfI)
 
