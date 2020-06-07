@@ -86,7 +86,7 @@
             android:layout_above="@id/headerMenu"
             android:src="@drawable/ic_person"
             android:background="@drawable/border"
-            android:padding="5dp"/>
+            android:padding="15dp"/>
 
         <ImageView
             android:id="@+id/ivPayungiLogo"

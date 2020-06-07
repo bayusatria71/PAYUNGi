@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -144,6 +145,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
         googleMap.setMyLocationEnabled(true);
         LatLng latLng = new LatLng(latitude, longitude);
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-6.328681,106.793681)).title("Stasiun PAYUNGI")); //ubah disini tambahin kalo perlu banyak
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));

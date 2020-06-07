@@ -12,7 +12,7 @@
         android:layout_marginBottom="10dp"
         android:src="@drawable/ic_person"
         android:background="@drawable/border"
-        android:padding="5dp"/>
+        android:padding="15dp"/>
 
     <EditText
         android:id="@+id/tvName"

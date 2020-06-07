@@ -149,7 +149,7 @@ public class PhoneCreditTabFragment extends Fragment {
                 Map<String, Object> mapper = new HashMap<>();
                 mapper.put("sender","PAYUNGI");
                 mapper.put("price",topUp);
-                mapper.put("pesan","Berhasil melakukan Top Up sebesar : " + topUp);
+                mapper.put("pesan","Berhasil melakukan Top Up");
                 balance = balance + topUp;
                 tempTopUp.put("Balance",balance);
                 userReference.update(tempTopUp);
