@@ -4,8 +4,7 @@ One of 2 repository for PAYUNGI project, This one for User Application.
 **CONTENT**
 * [What is PAYUNGI](#what-is-payungi)
 * [Screenshots](#screenshots)
-* [Environment Setting Guide](#environment-setting-guide)
-* [PAYUNGI Environment Installation Guide](#payungi-environment-installation-guide)
+* [Environment Installation Guide](#environment-installation-guide)
   * [Android Studio Set-up](#android-studio-set-up)
   * [Firebase Set-up](#firebase-set-up)
   * [Android Virtual Devices Set-up](#android-virtual-devices-set-up)
@@ -22,7 +21,7 @@ These are a few picture of PAYUNGI user app and station app.
 
 ![User Application](https://drive.google.com/uc?export=view&id=11J7XXvehyI0CoYey8mDFNhtdXyVqUdfI)
 
-# Environment Setting Guide
+# Environment Installation Guide
 In this section, i will explain to you how you can join the development of PAYUNGI.
 Before we start, Below are the requirement to start developing PAYUNGI:
 * [Java Development Kit](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (Recommeneded to use JDK-8 or greater JDK version) 
@@ -33,7 +32,6 @@ Before we start, Below are the requirement to start developing PAYUNGI:
 
 After you achieved all in the list, now we can start PAYUNGI developement.
 
-## PAYUNGI Environment Installation Guide
 ### Android Studio Set-up
 
 After you download Android Studio, the first thing Android studio gonna ask whether user want to make new project or open an existing project.
