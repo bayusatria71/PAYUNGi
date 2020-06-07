@@ -14,7 +14,7 @@
     <item
         android:id="@+id/rent_button"
         android:icon="@drawable/ic_qr_code"
-        android:title="QR Code"/>
+        android:title="Rent"/>
 
     <item
         android:id="@+id/inbox_menu"

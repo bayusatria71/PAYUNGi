@@ -18,8 +18,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BankTabFragment extends Fragment {
 
-    private int[] imageLogos = {R.drawable.bni, R.drawable.bank_mandiri, R.drawable.bca, R.drawable.danamon};
-    private String[] bankNames = {"BNI", "Bank Mandiri", "BCA", "Danamon"};
+    private int[] imageLogos = {R.drawable.bni, R.drawable.bank_mandiri, R.drawable.danamon};
+    private String[] bankNames = {"BNI", "Bank Mandiri", "Danamon"};
 
 
     private ExpandableListView expBank;
@@ -45,12 +45,6 @@ public class BankTabFragment extends Fragment {
                                 "5. Enter the PAYUNGi Company Code - 42069\n\n" +
                                 "6. Enter your Virtual Account Number - 42069 + Your Mobile Number\n\n" +
                                 "7. Enter the nominal top-up",
-                        "1. Insert your ATM card and BCA PIN\n\n" +
-                                "2. Select 'Other Transactions' menu\n\n" +
-                                "3. Select the 'Transfer' menu\n\n" +
-                                "4. Select 'Go to BCA Virtual Account' menu\n\n" +
-                                "5. Enter your Virtual Account Number - 42069 + Your Mobile Number\n\n" +
-                                "6. Enter the nominal top-up",
                         "1. Enter your Danamon ATM card and PIN\n\n" +
                                 "2. Select the 'Payment' menu\n\n" +
                                 "3. Select 'E-Commerce' menu\n\n" +

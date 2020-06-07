@@ -1,14 +1,15 @@
 # PAYUNGI
-A repo for PAYUNGI project
+One of 2 repository for PAYUNGI project, This one for User Application.
+* [User Application](https://github.com/bayusatria71/PAYUNGi)
+* [Station Application](https://github.com/GitaAyu06/PAYUNGi-Station)
 
 **CONTENT**
 * [What is PAYUNGI](#what-is-payungi)
 * [Screenshots](#screenshots)
-* [Environment Setting Guide](#environment-setting-guide)
-* [PAYUNGI Environment Installation Guide](#payungi-environment-installation-guide)
+* [Environment Installation Guide](#environment-installation-guide)
   * [Android Studio Set-up](#android-studio-set-up)
   * [Firebase Set-up](#firebase-set-up)
-  * [Android Virtual Devices (AVD) Set-up](#android-virtual-devices-(avd)-set-up)
+  * [Android Virtual Devices Set-up](#android-virtual-devices-set-up)
 * [PAYUNGI Compiling Guide](#payungi-compiling-guide)
   * [Build Debug-app](#build-debug-app)
   * [Build Signed-app](#build-signed-app)
@@ -22,7 +23,7 @@ These are a few picture of PAYUNGI user app and station app.
 
 ![User Application](https://drive.google.com/uc?export=view&id=11J7XXvehyI0CoYey8mDFNhtdXyVqUdfI)
 
-# Environment Setting Guide
+# Environment Installation Guide
 In this section, i will explain to you how you can join the development of PAYUNGI.
 Before we start, Below are the requirement to start developing PAYUNGI:
 * [Java Development Kit](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (Recommeneded to use JDK-8 or greater JDK version) 
@@ -33,14 +34,13 @@ Before we start, Below are the requirement to start developing PAYUNGI:
 
 After you achieved all in the list, now we can start PAYUNGI developement.
 
-## PAYUNGI Environment Installation Guide
 ### Android Studio Set-up
 
-After you download Android Studio, the first thing Android studio gonna ask is whether user want to make new project or open an existing project.
+After you download Android Studio, the first thing Android studio gonna ask whether user want to make new project or open an existing project.
 
 ![Option](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/Open%20existing%20prpject.PNG)
 
-Choose **open an existing project**, then made sure you choose the PAYUNGI-master clone/download
+Choose **open an existing project**, then make sure you choose the PAYUNGI-master clone/download
 
 ![Example](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/PayungiMaster.PNG)
 
@@ -75,7 +75,7 @@ After you agreed to allow connection of firebase with android studio, go back to
 
 in the picture i choose to use project that i've already had, but for you that dont have any project, choose to make one and give it a name that properly fits the project, and by doing that you're ready to test your code.
 
-### Android Virtual Devices (AVD) Set-up
+### Android Virtual Devices Set-up
 Running to test your code could be done in 2 way, Use your own phone or use Android Virtual Device. I recommend you to use AVD instead your phone, it's easier this way to debug your code if it's still has bugs and error, but requires some of your memory, storage and processing to use AVD.
 
 To start with, you could open the AVD manager thats located near run button in top right of android studio.
@@ -84,7 +84,7 @@ To start with, you could open the AVD manager thats located near run button in t
 
 then it will show the manager
 
-![AVD])(https://github.com/bayusatria71/PAYUNGi/blob/master/Images/AvdManager.PNG)
+![AVD](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/AvdManager.PNG)
 
 if you doesnt have any AVD yet, click on **Create Virtual Device**
 
@@ -103,7 +103,37 @@ Then click download, then it will open new tab that will automatically download 
 if the download succeeded, then you can virtualize the phone to test the codes.
 
 ## PAYUNGI Compiling Guide
-After you set up the Android, Firebase and the AVD, its finally time to Build the Application to an APK file. There is 2 kind of apk type, one for debug and one signed-app when the app ready to be released.
+After you set up the Android, Firebase and the AVD, its finally time to Build the Application to an APK file. There is 2 kind of apk type, one for debug and one for signed-app ,when the app is ready to be released.
+
 ### Build Debug-app
+To Build Debug app all you need to do is  go to Build tab, and choose Build APK
+
+![Build Apk](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/BuildAPK.jpg)
+
+Then it will make the Apk for you, it would take about 1 - 2 minutes to build the APK. When it finished it will show you a baloon pop up
+
+![Done](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/BuildAPKDone.jpg)
+
+in the baloon there's a hyperlink that will redirect you to the apk location. Click it to take you to the apk
+
+![Example Done](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/apk%20done.jpg)
+
+After the apk is built, it can be use to install the project to phones and AVD to test the codes.
+But it will need your action to move the apk manually to phone or avd storage, if you want to test it in AVD without building any APK, you can choose run the app on the AVD.
 
 ### Build Signed-app
+
+To build Released app that will be placed in google play store, it need you to sign the app with your credential so that Google play store could guarantee the safety of your app. You sign it by build a signed apk, to do this you choose Generate Siged Apk in the build tab
+
+![Generate Signed Apk](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/signed.jpg)
+
+After that it wants you to give the app its keystore, if you dont have one click on create new
+
+![Create new](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/CreateNewKeyStore.jpg)
+
+Fill out all the list, make sure you remember the password. After you make the Keystore you need to define the apps type, debug or release.
+
+![Release/Debug](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/Release.jpg)
+
+Choose release and check v1 and v2, its not necessary but if it bothering the build, just choose on of the Version.
+After that it will generate your build APK, the same as building un-signed APK it will pop up a baloon that can redirect you to the location of the Apk. Thus you're done and you can upload your app to google play store without any problem.
