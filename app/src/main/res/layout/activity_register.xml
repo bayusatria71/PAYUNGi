@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,108 +9,80 @@
     tools:context=".Register">
 
     <ImageView
-        android:id="@+id/gambarLogo2"
-        android:layout_width="408dp"
-        android:layout_height="279dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.075"
+        android:id="@+id/imagePayungi"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
         app:srcCompat="@mipmap/payungi_logo" />
-
-    <TextView
-        android:id="@+id/loginText"
-        android:layout_width="246dp"
-        android:layout_height="27dp"
-        android:text="Already have account ? Login Here"
-        app:layout_constraintBottom_toTopOf="@+id/registerButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerDate"
-        app:layout_constraintVertical_bias="0.22000003" />
-
-    <EditText
-        android:id="@+id/registerPassword"
-        android:layout_width="372dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
-
-    <EditText
-        android:id="@+id/registerEmail"
-        android:layout_width="373dp"
-        android:layout_height="51dp"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/registerName"
-        app:layout_constraintVertical_bias="0.04" />
 
     <EditText
         android:id="@+id/registerName"
-        android:layout_width="373dp"
-        android:layout_height="51dp"
-        android:ems="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Name"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        android:layout_below="@+id/imagePayungi"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="5dp"/>
+
+    <EditText
+        android:id="@+id/registerEmail"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/registerName"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="5dp"/>
+
+    <EditText
+        android:id="@+id/registerPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_below="@id/registerEmail"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="5dp"/>
 
     <EditText
         android:id="@+id/registerPhone"
-        android:layout_width="373dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Phone"
         android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
+        android:layout_below="@id/registerPassword"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="5dp"/>
 
     <EditText
         android:id="@+id/registerDate"
-        android:layout_width="373dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="Birth Date"
         android:inputType="text|date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPhone"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_below="@id/registerPhone"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="5dp"/>
 
     <Button
         android:id="@+id/registerButton"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="251dp"
-        android:layout_height="46dp"
+        android:background="@drawable/bordered_button_shape"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/registerPassword"
-        app:layout_constraintVertical_bias="0.761" />
+        android:layout_below="@id/registerDate"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginVertical="5dp"/>
+
+
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have account ? Login Here"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/registerButton"/>
 
     <ProgressBar
         android:id="@+id/loadRegister"
@@ -117,8 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerButton" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_below="@id/loginText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+</RelativeLayout>

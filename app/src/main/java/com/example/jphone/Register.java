@@ -55,7 +55,7 @@ public class Register extends AppCompatActivity {
         registerDate = findViewById(R.id.registerDate);
         loginText = findViewById(R.id.loginText);
         registerButton = findViewById(R.id.registerButton);
-        gambarLogo2 = findViewById(R.id.gambarLogo2);
+        gambarLogo2 = findViewById(R.id.imagePayungi);
         loadRegister = findViewById(R.id.loadRegister);
         db = FirebaseFirestore.getInstance();
 

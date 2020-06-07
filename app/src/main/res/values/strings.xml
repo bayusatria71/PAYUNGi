@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PAYUNGI</string>
+    <string name="app_name">PAYUNGi</string>
     <string name="title_activity_maps">Map</string>
     <string name="map_key" translatable="false">AIzaSyDZSAehN4i5MmyHQqe_KbQ5FLLb9cxpwUw</string>
 </resources>

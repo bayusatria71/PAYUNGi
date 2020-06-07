@@ -43,7 +43,7 @@ public class LoginPage extends AppCompatActivity {
     inputEmail = findViewById(R.id.inputEmail);
     inputPassword = findViewById(R.id.inputPassword);
         if(mAuth.getCurrentUser() != null){
-            Toast.makeText(this, "Logged in as "+ mAuth.getCurrentUser(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Logged in as "+ mAuth.getCurrentUser().getEmail(),Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }

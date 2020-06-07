@@ -98,7 +98,7 @@ public class PhoneCreditTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 topUp = 30000;
-                etTopUpAmount.setText("50,000");
+                etTopUpAmount.setText("30,000");
             }
         });
 
@@ -106,7 +106,7 @@ public class PhoneCreditTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 topUp = 50000;
-                etTopUpAmount.setText("100,000");
+                etTopUpAmount.setText("50,000");
             }
         });
 
@@ -152,7 +152,12 @@ public class PhoneCreditTabFragment extends Fragment {
                 mapper.put("pesan","Berhasil melakukan Top Up");
                 balance = balance + topUp;
                 tempTopUp.put("Balance",balance);
-                userReference.update(tempTopUp);
+                userReference.update(tempTopUp).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getContext(), "Top Up berhasil", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 tvBalance.setText(rupiah.format(balance));
                 inboxTopUp.set(mapper);
             }

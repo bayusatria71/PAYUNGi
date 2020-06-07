@@ -26,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -145,7 +146,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
         googleMap.setMyLocationEnabled(true);
         LatLng latLng = new LatLng(latitude, longitude);
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(-6.328681,106.793681)).title("Stasiun PAYUNGI")); //ubah disini tambahin kalo perlu banyak
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-3.432974,114.861960)).title("Stasiun PAYUNGi 1").icon(BitmapDescriptorFactory.fromResource(R.drawable.umbrella)));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-3.432857,114.861942)).title("Stasiun PAYUNGi 2").icon(BitmapDescriptorFactory.fromResource(R.drawable.umbrella)));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(-3.432771,114.862258)).title("Stasiun PAYUNGi 3").icon(BitmapDescriptorFactory.fromResource(R.drawable.umbrella)));
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));

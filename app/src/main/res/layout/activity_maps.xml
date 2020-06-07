@@ -8,4 +8,4 @@
     android:layout_height="match_parent"
     android:layout_marginTop="169dp"
     android:layout_marginBottom="100dp"
-    tools:context=".Maps" />
+    tools:context=".MainActivity" />
