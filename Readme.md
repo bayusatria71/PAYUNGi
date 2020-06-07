@@ -36,11 +36,11 @@ After you achieved all in the list, now we can start PAYUNGI developement.
 ## PAYUNGI Environment Installation Guide
 ### Android Studio Set-up
 
-After you download Android Studio, the first thing Android studio gonna ask is whether user want to make new project or open an existing project.
+After you download Android Studio, the first thing Android studio gonna ask whether user want to make new project or open an existing project.
 
 ![Option](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/Open%20existing%20prpject.PNG)
 
-Choose **open an existing project**, then made sure you choose the PAYUNGI-master clone/download
+Choose **open an existing project**, then make sure you choose the PAYUNGI-master clone/download
 
 ![Example](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/PayungiMaster.PNG)
 
@@ -103,7 +103,8 @@ Then click download, then it will open new tab that will automatically download 
 if the download succeeded, then you can virtualize the phone to test the codes.
 
 ## PAYUNGI Compiling Guide
-After you set up the Android, Firebase and the AVD, its finally time to Build the Application to an APK file. There is 2 kind of apk type, one for debug and one signed-app when the app ready to be released.
-### Build Debug-app
+After you set up the Android, Firebase and the AVD, its finally time to Build the Application to an APK file. There is 2 kind of apk type, one for debug and one for signed-app ,when the app is ready to be released.
 
+### Build Debug-app
+To Build Debug app all you need to do is  go to Build tab, and choose Build APK
 ### Build Signed-app
