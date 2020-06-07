@@ -132,6 +132,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 mAuth.getInstance().signOut();
                 startActivity(new Intent(getContext(), LoginPage.class));
+                getActivity().finish();
             }
         });
 
