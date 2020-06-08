@@ -77,7 +77,6 @@ public class InboxFragment extends Fragment {
                         messageList.add("Amount : " + documentSnapshot.getLong("price") + "\n" + documentSnapshot.getString("pesan"));
                         senderList.add(documentSnapshot.getString("sender"));
                     }
-                    Collections.sort(dateList, Collections.<Date>reverseOrder());
                     InboxAdapter adapter = new InboxAdapter(getContext(), messageList, dateList, senderList);
                     lvInbox.setAdapter(adapter);
                 }
