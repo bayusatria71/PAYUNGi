@@ -1,5 +1,6 @@
 # PAYUNGI
 One of 2 repository for PAYUNGI project, This one for User Application.
+
 * [User Application](https://github.com/bayusatria71/PAYUNGi)
 * [Station Application](https://github.com/GitaAyu06/PAYUNGi-Station)
 
@@ -15,13 +16,14 @@ One of 2 repository for PAYUNGI project, This one for User Application.
   * [Build Signed-app](#build-signed-app)
 
 ## What is PAYUNGI
-PAYUNGI is an Umbrella renting application for smartphone that uses Android as its OS. Payungi has two application, for the users and for the stations. In the User application, users can 
+PAYUNGi is an umbrella rental platform that provides umbrellas for people in the streets, tourist attractions, and the other outdoor venues. The presence of PAYUNGi has made urban people do not need to always carry an umbrella everywhere because, when they want an umbrella, they only have to rent one from the PAYUNGi station without the need to buy a new umbrella. PAYUNGi comes in two types of applications, which are mobile app (in the customer device) and station app (in the PAYUNGi station machine). The mobile app saves the customer data including the QR code that is used to rent the umbrella by scanning the QR code to the station camera. Furthermore, the mobile app also facilitates balance top-up and transfer and also showing the PAYUNGi station map. On the other side, the PAYUNGi station app responsible for scanning the user's QR code to verify rental and return activity. Some important information related to PAYUNGi usage also can be displayed on the station app like guidance to use PAYUNGi and top-up information. On the station app, the user also able to report the problems that they have while using the PAYUNGi platform.
 
 ## Screenshots
 
 These are a few picture of PAYUNGI user app and station app.
 
-![User Application](https://drive.google.com/uc?export=view&id=11J7XXvehyI0CoYey8mDFNhtdXyVqUdfI)
+![User Application](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/MapActivity.jpg) ![user_Application_2](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/QrCodeActivity.jpg)
+![Station Application](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/Station.jpg) ![Station Application 2](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/Station2.jpg)
 
 # Environment Installation Guide
 In this section, i will explain to you how you can join the development of PAYUNGI.

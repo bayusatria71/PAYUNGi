@@ -19,20 +19,30 @@
         android:roundIcon="@mipmap/payungi_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TopUpActivity"></activity>
-        <activity android:name=".TransferActivity" />
+        <activity
+            android:name=".TopUpActivity"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".TransferActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".Register" />
-        <activity android:name=".LoginPage">
+        <activity
+            android:name=".Register"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".LoginPage"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
