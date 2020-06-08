@@ -21,7 +21,8 @@ PAYUNGi is an umbrella rental platform that provides umbrellas for people in the
 
 These are a few picture of PAYUNGI user app and station app.
 
-![User Application](https://drive.google.com/uc?export=view&id=11J7XXvehyI0CoYey8mDFNhtdXyVqUdfI)
+![User Application](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/MapActivity.jpg) ![user_Application_2](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/QrCodeActivity.jpg)
+![Station Application](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/Station.jpg) ![Station Application 2](https://github.com/bayusatria71/PAYUNGi/blob/master/Images/Station2.jpg)
 
 # Environment Installation Guide
 In this section, i will explain to you how you can join the development of PAYUNGI.
